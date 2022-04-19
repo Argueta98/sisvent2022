@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
+    <?= $form->field($model, 'id') ?>
+
     <?= $form->field($model, 'fecha_vencimiento') ?>
 
     <?= $form->field($model, 'cantidad_percedero') ?>

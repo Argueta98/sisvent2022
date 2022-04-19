@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "perecedero".
  *
+ * @property int $id
  * @property string $fecha_vencimiento
  * @property float $cantidad_percedero
  * @property int $idproducto
@@ -33,7 +34,7 @@ class TblPerecedero extends \yii\db\ActiveRecord
             [['fecha_vencimiento', 'cantidad_percedero', 'idproducto'], 'required'],
             [['fecha_vencimiento'], 'safe'],
             [['cantidad_percedero'], 'number'],
-            [['idproducto', 'estado'], 'integer'],
+            [['estado', 'estado'], 'integer'],
             [['idproducto'], 'unique'],
             [['idproducto'], 'exist', 'skipOnError' => true, 'targetClass' => TblProducto::className(), 'targetAttribute' => ['idproducto' => 'id']],
         ];
@@ -45,6 +46,7 @@ class TblPerecedero extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
+            'id' => Yii::t('app', 'ID'),
             'fecha_vencimiento' => Yii::t('app', 'Fecha Vencimiento'),
             'cantidad_percedero' => Yii::t('app', 'Cantidad Percedero'),
             'idproducto' => Yii::t('app', 'Idproducto'),

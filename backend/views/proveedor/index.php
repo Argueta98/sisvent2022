@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'correo',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TblProveedor $model, $key, $index, $column) {
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

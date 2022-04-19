@@ -14,7 +14,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-perecedero-index">
 
-
     <p>
     <?= Html::a('<i class="fa fa-plus-circle"></i> Agregar', ['create'], ['class' => 'btn btn-primary']) ?>
     </p>
@@ -27,14 +26,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+           // 'id',
             'fecha_vencimiento',
             'cantidad_percedero',
             'idproducto',
             'estado',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TblPerecedero $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idproducto' => $model->idproducto]);
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
         ],

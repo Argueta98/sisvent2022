@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'serie',
             'numero_compra',
             'fecha_compra',
-            //'fecha_creacion',
+            'fecha_creacion',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TblCompra $model, $key, $index, $column) {
+                'urlCreator' => function ($action,  $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

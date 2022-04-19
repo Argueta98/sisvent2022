@@ -17,9 +17,9 @@ class PerecederoSearch extends TblPerecedero
     public function rules()
     {
         return [
+            [['id', 'idproducto', 'estado'], 'integer'],
             [['fecha_vencimiento'], 'safe'],
             [['cantidad_percedero'], 'number'],
-            [['idproducto', 'estado'], 'integer'],
         ];
     }
 
@@ -59,6 +59,7 @@ class PerecederoSearch extends TblPerecedero
 
         // grid filtering conditions
         $query->andFilterWhere([
+            'id' => $this->id,
             'fecha_vencimiento' => $this->fecha_vencimiento,
             'cantidad_percedero' => $this->cantidad_percedero,
             'idproducto' => $this->idproducto,

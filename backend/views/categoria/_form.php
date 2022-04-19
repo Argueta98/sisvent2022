@@ -43,17 +43,17 @@ use yii\helpers\Html;
                                 ]);?>   
                         </div>
                         <div class="col-md-6">   
-                        <?= Html::activeLabel($model, 'fecha_actualizar', ['class' => 'control-label']) ?>
-                        <br>
-                         <?= DatePicker::widget([
-                                    'name' => 'fecha_creacion',
-                                    'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                    'value' => '01-Ene-2022',
-                                    'pluginOptions' => [
-                                        'autoclose' => true,
-                                        'format' => 'dd-M-yyyy'
-                                    ]
-                                ]);?>   
+                             <?= Html::activeLabel($model, 'fecha_actualizar', ['class' => 'control-label']) ?>
+                            <br>
+                            <?= DatePicker::widget([
+                                        'name' => 'fecha_creacion',
+                                        'type' => DatePicker::TYPE_COMPONENT_PREPEND,
+                                        'value' => '01-Ene-2022',
+                                        'pluginOptions' => [
+                                            'autoclose' => true,
+                                            'format' => 'dd-M-yyyy'
+                                        ]
+                                    ]);?>   
                         </div>
                       
                     </div>

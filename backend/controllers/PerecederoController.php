@@ -49,14 +49,14 @@ class PerecederoController extends Controller
 
     /**
      * Displays a single TblPerecedero model.
-     * @param int $idproducto Idproducto
+     * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($idproducto)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($idproducto),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -69,9 +69,27 @@ class PerecederoController extends Controller
     {
         $model = new TblPerecedero();
 
-        if ($this->request->isPost) {
+
+        
+        if ($model->load($this->request->post())) {
+            $model->fecha_vencimiento = date('Y-m-d H:i:s');
+           // $model->id_user = 1;
+            
+            if (!$model->save()){
+               print_r($model->getErrors());
+               die(); 
+            }
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
+     /*   if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'idproducto' => $model->idproducto]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -79,22 +97,22 @@ class PerecederoController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
      * Updates an existing TblPerecedero model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $idproducto Idproducto
+     * @param int $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($idproducto)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($idproducto);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'idproducto' => $model->idproducto]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -105,13 +123,13 @@ class PerecederoController extends Controller
     /**
      * Deletes an existing TblPerecedero model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $idproducto Idproducto
+     * @param int $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($idproducto)
+    public function actionDelete($id)
     {
-        $this->findModel($idproducto)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -119,13 +137,13 @@ class PerecederoController extends Controller
     /**
      * Finds the TblPerecedero model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $idproducto Idproducto
+     * @param int $id ID
      * @return TblPerecedero the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($idproducto)
+    protected function findModel($id)
     {
-        if (($model = TblPerecedero::findOne(['idproducto' => $idproducto])) !== null) {
+        if (($model = TblPerecedero::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

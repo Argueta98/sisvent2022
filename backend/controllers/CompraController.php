@@ -69,7 +69,25 @@ class CompraController extends Controller
     {
         $model = new TblCompra();
 
-        if ($this->request->isPost) {
+        
+        if ($model->load($this->request->post())) {
+            $model->fecha_compra = date('Y-m-d H:i:s');
+            $model->fecha_creacion = date('Y-m-d H:i:s');
+           // $model->id_user = 1;
+            
+            if (!$model->save()){
+               print_r($model->getErrors());
+               die(); 
+            }
+
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+
+      /*  if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -79,7 +97,7 @@ class CompraController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-        ]);
+        ]);*/
     }
 
     /**
