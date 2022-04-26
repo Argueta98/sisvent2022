@@ -48,7 +48,7 @@
                             ['label' => 'Presentacion','url' => ['presentacion/index'], 'icon' => ''],
                            // ['label' => 'Marca','url' => ['#'], 'icon' => ''],
                             ['label' => 'Producto','url' => ['producto/index'], 'icon' => ''],
-                            ['label' => 'Percederos', 'url' => ['perecedero/index'], 'icon' => '' ],
+                            ['label' => 'Perecederos', 'url' => ['perecedero/index'], 'icon' => '' ],
                         ]
 
                     ],
@@ -67,7 +67,7 @@
                     [
                         'label' => 'Caja', 'icon' => 'box',
                         'items' => [
-                            ['label' => 'Administrar Caja', 'url' => ['#'], 'icon' => ''],
+                            ['label' => 'Administrar Caja', 'url' => ['caja/index'], 'icon' => ''],
                             ['label' => 'Historial de Caja','url' => ['#'], 'icon' => ''],
                         ]
 
@@ -87,7 +87,7 @@
                     [
                         'label' => 'Inventario', 'icon' => 'th',
                         'items' => [
-                            ['label' => 'Nuevo Invenatrio', 'url' => ['#'], 'icon' => ''],
+                            ['label' => 'Nuevo Inventario', 'url' => ['#'], 'icon' => ''],
                             ['label' => 'Kardex','url' => ['#'], 'icon' => ''],
                         ]
 
@@ -105,8 +105,8 @@
                     [
                         'label' => 'Usuarios', 'icon' => 'users',
                         'items' => [
-                            ['label' => 'Tipo de Comprobantes', 'url' => ['#'], 'icon' => ''],
-                            ['label' => 'Tiraje de Comprobantes','url' => ['#'], 'icon' => ''],
+                            ['label' => 'Empleado', 'url' => ['#'], 'icon' => ''],
+                            ['label' => 'Usuario','url' => ['#'], 'icon' => ''],
                         ]
 
                     ],

@@ -49,7 +49,7 @@ class TblPerecedero extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'fecha_vencimiento' => Yii::t('app', 'Fecha Vencimiento'),
             'cantidad_percedero' => Yii::t('app', 'Cantidad Percedero'),
-            'idproducto' => Yii::t('app', 'Idproducto'),
+            'idproducto' => Yii::t('app', 'Producto'),
             'estado' => Yii::t('app', 'Estado'),
         ];
     }

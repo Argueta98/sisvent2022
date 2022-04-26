@@ -85,7 +85,7 @@ class TblProducto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCategoria0()
+    public function getIdCategoria()
     {
         return $this->hasOne(Categoria::className(), ['id' => 'idCategoria']);
     }
