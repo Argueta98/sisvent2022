@@ -73,10 +73,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idCategoria',
                     'vAlign' => 'middle',
-                    'format' => 'html',
-                    'value' => 'idCategoria.nombre',
+                    'format' => 'html',                     
+                    'value' => function ($model, $key, $index, $widget) {
+                        return Html::a($model->nombre,  ['categoria/view', 'idCategoria' => $model->idCategoria]);
+                    },
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'id', 'nombre'),
+                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'nombre', 'id'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -108,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'idPresentacion',
                     'vAlign' => 'middle',
                     'format' => 'html',
-                    'value' => 'presentacion',
+                    'value' => 'idPresentacion',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
