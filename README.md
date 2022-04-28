@@ -5,6 +5,14 @@
     <h1 align="center">Yii 2 Advanced Project Template</h1>
     <br>
 </p>
+<br>
+<p align="center">
+    <a href="https://github.com/Argueta98/sisvent2022.git" target="_blank">
+        <img src="https://drive.google.com/file/d/1EEn1q1K3XAJ4sEMxRqetSRcumSeV-LXH/view?usp=sharing" height="100px">
+    </a>
+    <h1 align="center">Sistema de Inventario </h1>
+    <br>
+</p>
 
 Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
 developing complex Web applications with multiple tiers.
