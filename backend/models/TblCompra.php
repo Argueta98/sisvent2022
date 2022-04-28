@@ -48,7 +48,7 @@ class TblCompra extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'idProveedor' => Yii::t('app', 'Id Proveedor'),
+            'idProveedor' => Yii::t('app', 'Proveedor'),
             'serie' => Yii::t('app', 'Serie'),
             'numero_compra' => Yii::t('app', 'Numero Compra'),
             'fecha_compra' => Yii::t('app', 'Fecha Compra'),

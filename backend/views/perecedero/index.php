@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'headerOptions' => ['class' => 'kv-sticky-column'],
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
-                    'hAlign' => 'right',
+                    'hAlign' => 'center',
                     'width' => '250px',
                     'filterType' => GridView::FILTER_DATE,
                     'filterWidgetOptions' => ([
@@ -78,8 +78,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idproducto',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => 'idProducto.nombre',
+                    'value' => function($model){
+                        $producto = TblProducto::findOne($model->idproducto);
+                        return $producto->nombre;
+                    } ,
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [

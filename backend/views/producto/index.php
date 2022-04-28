@@ -56,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'nombre',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
                     'value' => function ($model, $key, $index, $widget) {
                         return Html::a($model->nombre,  ['view', 'nombre' => $model->id]);
@@ -73,12 +74,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idCategoria',
                     'vAlign' => 'middle',
-                    'format' => 'html',                     
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->nombre,  ['categoria/view', 'idCategoria' => $model->idCategoria]);
-                    },
+                    'hAlign' => 'center',
+                    'format' => 'html', //esta mierda no se podia solucionar hasta que reina vio un codigo en inter                    
+                    'value' => function($model){
+                        $categoria = TblCategoria::findOne($model->idCategoria);
+                        return $categoria->nombre;
+                    } ,
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'nombre', 'id'),
+                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -109,8 +112,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idPresentacion',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => 'idPresentacion',
+                    'value' => function($model){
+                        $presentacion = TblPresentacion::findOne($model->idPresentacion);
+                        return $presentacion->nombre;
+                    },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
