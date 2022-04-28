@@ -8,7 +8,7 @@
 <br>
 <p align="center">
     <a href="https://github.com/Argueta98/sisvent2022.git" target="_blank">
-        <img src="./img/PRINCIPAL.jpg" height="500px">
+        <img src="./img/PRINCIPAL.jpg" height="300px">
     </a>
     <h1 align="center">Sistema de Inventario </h1>
     <br>
