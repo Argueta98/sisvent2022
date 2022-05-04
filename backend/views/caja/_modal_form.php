@@ -1,7 +1,7 @@
 <?php
 
-use app\models\TblDepartamentos;
-use app\models\TblMunicipios;
+
+
 use kartik\widgets\DepDrop;
 use kartik\select2\Select2;
 use kartik\widgets\ActiveForm;
@@ -68,6 +68,7 @@ $js = <<<SCRIPT
                 {
                     $.pjax.reload({container:'#datosGrid'});
                     $('#modal_datos').trigger('reset');
+
                 } else
                 {
                     $('#message').html(result);

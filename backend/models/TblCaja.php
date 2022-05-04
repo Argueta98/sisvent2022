@@ -13,6 +13,8 @@ use Yii;
  * @property float|null $monto_cierre
  * @property string|null $fecha_cierre
  * @property int|null $estado
+ *
+ * @property MovimientoCaja[] $movimientoCajas
  */
 class TblCaja extends \yii\db\ActiveRecord
 {
@@ -49,5 +51,15 @@ class TblCaja extends \yii\db\ActiveRecord
             'fecha_cierre' => Yii::t('app', 'Fecha Cierre'),
             'estado' => Yii::t('app', 'Estado'),
         ];
+    }
+
+    /**
+     * Gets query for [[MovimientoCajas]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMovimientoCajas()
+    {
+        return $this->hasMany(MovimientoCaja::className(), ['idCaja' => 'id']);
     }
 }

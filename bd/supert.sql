@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-04-2022 a las 03:26:41
+-- Tiempo de generación: 04-05-2022 a las 04:09:54
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 7.4.26
 
@@ -71,6 +71,13 @@ CREATE TABLE `compra` (
   `fecha_compra` date NOT NULL,
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `compra`
+--
+
+INSERT INTO `compra` (`id`, `idProveedor`, `serie`, `numero_compra`, `fecha_compra`, `fecha_creacion`) VALUES
+(1, 1, 'hshfasva7s7678711232', '1', '2022-04-15', '2022-04-15 18:34:36');
 
 -- --------------------------------------------------------
 
@@ -163,11 +170,19 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 --
 
 CREATE TABLE `perecedero` (
+  `id` int(11) NOT NULL,
   `fecha_vencimiento` date NOT NULL,
   `cantidad_percedero` decimal(8,2) NOT NULL,
   `idproducto` int(11) NOT NULL,
   `estado` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `perecedero`
+--
+
+INSERT INTO `perecedero` (`id`, `fecha_vencimiento`, `cantidad_percedero`, `idproducto`, `estado`) VALUES
+(1, '2022-04-15', '3.00', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -255,6 +270,13 @@ CREATE TABLE `proveedor` (
   `telefono` varchar(13) NOT NULL,
   `correo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `codigo`, `nit`, `nombre`, `direccion`, `razonsocial`, `telefono`, `correo`) VALUES
+(1, '0000-7652347612', '22222-2333-222-22', 'sas', 'sassss', 'sadad', '7898777', 'chae@gmaisisdsla.com');
 
 -- --------------------------------------------------------
 
@@ -429,6 +451,7 @@ ALTER TABLE `migration`
 -- Indices de la tabla `perecedero`
 --
 ALTER TABLE `perecedero`
+  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `fk_perecedero_producto` (`idproducto`);
 
 --
@@ -531,7 +554,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `compradetalle`
@@ -556,6 +579,12 @@ ALTER TABLE `empresa`
 --
 ALTER TABLE `inventario`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `perecedero`
+--
+ALTER TABLE `perecedero`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `permisos`
@@ -585,7 +614,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_cliente`

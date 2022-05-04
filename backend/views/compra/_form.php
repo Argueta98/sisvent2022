@@ -1,6 +1,7 @@
 <?php
 
 use app\models\TblProveedor;
+use app\models\TblComprobante;
 use app\models\TblProducto;
 use kartik\daterange\DateRangePicker;
 use kartik\widgets\ActiveForm;
@@ -29,7 +30,16 @@ use yii\helpers\Html;
                             <?= $form->field($model, 'idProveedor', ['showLabels' => false])->widget(Select2::className(), [
                                 'data' => ArrayHelper::map(TblProveedor::find()->all(), 'id', 'nombre'),
                                 'language' => 'es',
-                                'options' => ['placeholder' => '- Seleccionar Producto -'],
+                                'options' => ['placeholder' => '- Seleccionar Proveedor -'],
+                                'pluginOptions' => ['allowClear' => true],
+                            ]); ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'idComprobante', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'idComprobante', ['showLabels' => false])->widget(Select2::className(), [
+                                'data' => ArrayHelper::map(TblComprobante::find()->all(), 'id', 'nombre'),
+                                'language' => 'es',
+                                'options' => ['placeholder' => '- Seleccionar Comprobante -'],
                                 'pluginOptions' => ['allowClear' => true],
                             ]); ?>
                         </div>

@@ -4,6 +4,7 @@ Yii::$app->language = 'es_ES';
 use app\models\TblProveedor;
 use app\models\TblCompra;
 use app\models\TblProducto;
+use app\models\TblComprobante;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -45,6 +46,25 @@ $this->params['breadcrumbs'][] = $this->title;
                     } ,
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('nombre')->all(), 'id', 'nombre'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'attribute' => 'idComprobante',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'format' => 'html',
+                    'value' => function($model){
+                        $comprobante = TblComprobante::findOne($model->idComprobante);
+                        return $comprobante->nombre;
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblComprobante::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -166,6 +186,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' =>  [
                     [
                         'content' =>
+                        Html::a('<i class="fas fa-redo"></i> Volver', ['compra-detalle/index'], [
+                            'class' => 'btn btn-info',
+                            'data-pjax' => 0,
+                        ]) . ' ' .
                         Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,

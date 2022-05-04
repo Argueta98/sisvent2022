@@ -1,8 +1,10 @@
 <?php
 Yii::$app->language = 'es_ES';
 
-use app\models\TblCategoria;
-use app\models\TblPerecedero;
+use app\models\TblProveedor;
+use app\models\TblCompradetalle;
+use app\models\TblComprobante;
+use app\models\TblCompra;
 use app\models\TblProducto;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -14,7 +16,7 @@ use kartik\export\ExportMenu;
 /* @var $searchModel backend\models\OsigSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listado de Perecederos';
+$this->title = 'Detalle de Compras';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -35,37 +37,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'fecha_vencimiento',
-                    'headerOptions' => ['class' => 'kv-sticky-column'],
-                    'contentOptions' => ['class' => 'kv-sticky-column'],
+                    'attribute' => 'idCompra',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'width' => '250px',
-                    'filterType' => GridView::FILTER_DATE,
-                    'filterWidgetOptions' => ([
-                        'model' => $dataProvider,
-                        'attribute' => 'fecha_vencimiento',
-                        'convertFormat' => true,
-                        'pluginOptions' => [
-                            'format' => 'yyyy-M-dd',
-                            'autoWidget' => true,
-                            'autoclose' => true,
-                            'todayHighlight' => true,
-                        ],
-                    ]),
-                ],
-                [
-                    'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
-                    'format' => 'raw',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'attribute' => 'cantidad_percedero',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->cantidad_percedero, ['class' => 'badge ']);
-                    },
+                    'format' => 'html',
+                    'value' => function($model){
+                        $compra = TblCompra::findOne($model->idCompra);
+                        return $compra->numero_compra;
+                    } ,
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblPerecedero::find()->orderBy('cantidad_percedero')->all(), 'id', 'cantidad_percedero'),
+                    'filter' => ArrayHelper::map(TblCompra::find()->orderBy('id')->all(), 'id', 'numero_compra'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -73,15 +54,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                 ],
-
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'idproducto',
+                    'attribute' => 'idProducto',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'format' => 'html',
                     'value' => function($model){
-                        $producto = TblProducto::findOne($model->idproducto);
+                        $producto = TblProducto::findOne($model->idProducto);
                         return $producto->nombre;
                     } ,
                     'filterType' => GridView::FILTER_SELECT2,
@@ -94,26 +74,49 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
                 [
-                    'class' => 'kartik\grid\BooleanColumn',
-                    'trueLabel' => 'Si',
-                    'falseLabel' => 'No',
-                    'attribute' => 'estado',
-                    'width' => '120px',
+                    'class' => 'kartik\grid\DataColumn',
+                    'attribute' => 'cantidad',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'format' => 'html',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->cantidad, ['class' => 'badge bg-info ']);
+                    },
                     'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblCompradetalle::find()->orderBy('id')->all(), 'cantidad', 'cantidad'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ],
-                    'vAlign' => 'middle',
                 ],
-               
+              
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
+                    'format' => 'raw',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'attribute' => 'precio_unitario',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->precio_unitario, ['class' => 'badge bg-info']);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblCompradetalle::find()->orderBy('id')->all(), 'id', 'cantidad'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+              
                
                
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, \app\models\TblPerecedero $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, \app\models\TblCompradetalle $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
                 ],
@@ -130,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
 
             echo GridView::widget([
-                'id' => 'kv-producto',
+                'id' => 'kv-categoria',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => $gridColumns,
@@ -142,7 +145,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' =>  [
                     [
                         'content' =>
-                        Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
+                        Html::a('<i class="far fa-eye"></i> Ver Compras', ['compra/index'], [
+                            'class' => 'btn btn-info',
+                            'data-pjax' => 0,
+                        ]) . ' ' . 
+                        Html::a('<i class="fas fa-plus"></i> Agregar Detalle', ['create'], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,
                         ]) . ' ' .
@@ -167,7 +174,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'showPageSummary'=>$pageSummary,
                 'panel' => [
                     'type' => GridView::TYPE_PRIMARY,
-                    'heading' => 'Perecedero',
+                    'heading' => 'Compra',
                 ],
                 'persistResize' => false,
             ]);

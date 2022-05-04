@@ -3,7 +3,6 @@
 Yii::$app->language = 'es_ES';
 
 use app\models\TblCaja;
-use app\models\TblPresentacion;
 use app\models\TblProducto;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -132,7 +131,7 @@ Modal::end();
                 'toolbar' =>  [
                     [
                         'content' =>
-                        Html::button('<i class="fa fa-plus"></i> Modal', ['value' => Url::to('index.php?r=caja/representantes/create-modal'), 
+                        Html::button('<i class="fa fa-plus"></i> Modal', ['value' => Url::to(['create-modal']), 
                         'class' => 'btn btn-warning', 'id' => 'modalButton'
                         ]) .' &nbsp&nbsp '.
                         Html::a('<i class="fas fa-box-open"></i> Abrir Caja', ['create'], [

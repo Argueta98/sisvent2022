@@ -56,7 +56,7 @@
                         'label' => 'Compras', 'icon' => 'truck',
                         'items' => [
                             ['label' => 'Proveedores', 'url' => ['proveedor/index'], 'icon' => ''],
-                            ['label' => 'Realizar Compras','url' => ['compra/index'], 'icon' => ''],
+                            ['label' => 'Realizar Compras','url' => ['compra-detalle/index'], 'icon' => ''],
                             ['label' => 'Consultas', 'icon' => ''],
                             ['label' => 'Compras por Fecha','url' => ['#'], 'icon' => ''],
                             ['label' => 'Compras por Mes', 'icon' => ''],

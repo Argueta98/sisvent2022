@@ -5,9 +5,11 @@
 
 use yii\helpers\Html;
 use yii\bootstrap4\Modal;
+
 rmrevin\yii\fontawesome\AssetBundle::register($this);
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
 \hail812\adminlte3\assets\AdminLteAsset::register($this);
+\backend\assets\AppAsset::register($this);
 $this->registerCssFile('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback');
 
 $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/adminlte/dist');
