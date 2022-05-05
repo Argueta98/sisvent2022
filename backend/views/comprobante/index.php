@@ -2,7 +2,7 @@
 Yii::$app->language = 'es_ES';
 
 use app\models\TblCategoria;
-use app\models\TblPresentacion;
+use app\models\TblComprobante;
 use app\models\TblProducto;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -14,7 +14,7 @@ use kartik\export\ExportMenu;
 /* @var $searchModel backend\models\OsigSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listado de Productos';
+$this->title = 'Listado de Comprobante';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -39,69 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'attribute' => 'codigo',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->codigo, ['class' => 'badge bg-info ']);
-                    },
-                    'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('codigo')->all(), 'codigo', 'codigo'),
-                    'filterWidgetOptions' => [
-                        'options' => ['placeholder' => 'Todos...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ],
-                ],
-                [
-                    'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'nombre',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->nombre,  ['view', 'nombre' => $model->id]);
-                    },
-                    'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
-                    'filterWidgetOptions' => [
-                        'options' => ['placeholder' => 'Todos...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ],
-                ],
-                [
-                    'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'idCategoria',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'format' => 'html', 
-                    'value' => 'categoria.nombre',                
-                  /*  'value' => function($model){
-                        $categoria = TblCategoria::findOne($model->idCategoria);
-                        return $categoria->nombre;
-                    } ,*/
-                    'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'id', 'nombre'),
-                    'filterWidgetOptions' => [
-                        'options' => ['placeholder' => 'Todos...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ],
-                ],
-                [
-                    'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
-                    'format' => 'raw',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'attribute' => 'existencias',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->existencias, ['class' => 'badge bg-purple']);
+                        return Html::tag('span', $model->nombre, ['class' => 'badge bg-info ']);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('existencias')->all(), 'id', 'existencias'),
+                    'filter' => ArrayHelper::map(TblComprobante::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -109,31 +52,29 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                 ],
+                
+               
                 [
-                    'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'idPresentacion',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => 'presentacion.nombre',
-                   /* 'value' => function($model){
-                        $presentacion = TblPresentacion::findOne($model->idPresentacion);
-                        return $presentacion->nombre;
-                    },*/
+                    'class' => 'kartik\grid\BooleanColumn',
+                    'trueLabel' => 'Si',
+                    'falseLabel' => 'No',
+                    'attribute' => 'estado',
+                    'width' => '120px',
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
                             'allowClear' => true
                         ],
                     ],
+                    'vAlign' => 'middle',
                 ],
+              
                
                
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, \app\models\TblProducto $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, \app\models\TblComprobante $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
                 ],
@@ -150,7 +91,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]);
 
             echo GridView::widget([
-                'id' => 'kv-categoria',
+                'id' => 'kv-comprobante',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => $gridColumns,
@@ -184,10 +125,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'condensed' => true,
                 'responsive' => true,
                 'hover' => true,
-                //'showPageSummary'=>$pageSummary,
+                //'showPageSummary'=>$pageSummary,s
                 'panel' => [
                     'type' => GridView::TYPE_PRIMARY,
-                    'heading' => 'Producto',
+                    'heading' => 'Comprobantes',
                 ],
                 'persistResize' => false,
             ]);

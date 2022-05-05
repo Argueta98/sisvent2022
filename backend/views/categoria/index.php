@@ -172,7 +172,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 //'showPageSummary'=>$pageSummary,
                 'panel' => [
                     'type' => GridView::TYPE_PRIMARY,
-                    'heading' => 'Producto',
+                    'heading' => 'Categorias',
                 ],
                 'persistResize' => false,
             ]);

@@ -79,8 +79,7 @@ class CategoriaController extends Controller
                print_r($model->getErrors());
                die(); 
             }
-
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

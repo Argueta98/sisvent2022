@@ -76,7 +76,7 @@ class PresentacionController extends Controller
                die(); 
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

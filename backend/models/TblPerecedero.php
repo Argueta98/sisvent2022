@@ -59,8 +59,8 @@ class TblPerecedero extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdproducto0()
+    public function getProducto()
     {
-        return $this->hasOne(Producto::className(), ['id' => 'idproducto']);
+        return $this->hasOne(TblProducto::class, ['id' => 'idproducto']);
     }
 }

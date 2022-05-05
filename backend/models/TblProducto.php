@@ -77,7 +77,7 @@ class TblProducto extends \yii\db\ActiveRecord
      */
     public function getCompradetalles()
     {
-        return $this->hasMany(Compradetalle::className(), ['idProducto' => 'id']);
+        return $this->hasMany(TblCompradetalle::className(), ['idProducto' => 'id']);
     }
 
     /**
@@ -85,9 +85,9 @@ class TblProducto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCategoria()
+    public function getCategoria()
     {
-        return $this->hasOne(Categoria::className(), ['idCategoria' => 'id']);
+        return $this->hasOne(TblCategoria::class, ['id' => 'idCategoria']);
     }
 
     /**
@@ -95,9 +95,9 @@ class TblProducto extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdPresentacion0()
+    public function getPresentacion()
     {
-        return $this->hasOne(Presentacion::className(), ['id' => 'idPresentacion']);
+        return $this->hasOne(TblPresentacion::class, ['id' => 'idPresentacion']);
     }
 
     /**
@@ -107,7 +107,7 @@ class TblProducto extends \yii\db\ActiveRecord
      */
     public function getInventarios()
     {
-        return $this->hasMany(Inventario::className(), ['idProducto' => 'id']);
+        return $this->hasMany(TblInventario::className(), ['idProducto' => 'id']);
     }
 
     /**
@@ -117,7 +117,7 @@ class TblProducto extends \yii\db\ActiveRecord
      */
     public function getPerecedero()
     {
-        return $this->hasOne(Perecedero::className(), ['idproducto' => 'id']);
+        return $this->hasOne(TblPerecedero::className(), ['idproducto' => 'id']);
     }
 
     /**

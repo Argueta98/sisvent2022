@@ -1,18 +1,17 @@
 <?php
 
 namespace backend\controllers;
-use app\models\TblCategoria;
-use app\models\CategoriaSearch;
-use app\models\TblProducto;
-use app\models\ProductoSearch;
+
+use app\models\TblComprobante;
+use app\models\ComprobanteSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ProductoController implements the CRUD actions for TblProducto model.
+ * ComprobanteController implements the CRUD actions for TblComprobante model.
  */
-class ProductoController extends Controller
+class ComprobanteController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class ProductoController extends Controller
     }
 
     /**
-     * Lists all TblProducto models.
+     * Lists all TblComprobante models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ProductoSearch();
+        $searchModel = new ComprobanteSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,50 +48,28 @@ class ProductoController extends Controller
     }
 
     /**
-     * Displays a single TblProducto model.
+     * Displays a single TblComprobante model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
-        $searchModel = new CategoriaSearch();
-        $searchModel->id = $id;
-        $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new TblProducto model.
+     * Creates a new TblComprobante model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new TblProducto();
+        $model = new TblComprobante();
 
-        if ($model->load($this->request->post())) {
-            $model->fecha_creacion = date('Y-m-d H:i:s');
-           // $model->id_user = 1;
-            
-            if (!$model->save()){
-               print_r($model->getErrors());
-               die(); 
-            }
-
-            return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-
-      /*  if ($this->request->isPost) {
+        if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -102,11 +79,11 @@ class ProductoController extends Controller
 
         return $this->render('create', [
             'model' => $model,
-        ]);*/
+        ]);
     }
 
     /**
-     * Updates an existing TblProducto model.
+     * Updates an existing TblComprobante model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -126,7 +103,7 @@ class ProductoController extends Controller
     }
 
     /**
-     * Deletes an existing TblProducto model.
+     * Deletes an existing TblComprobante model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -140,15 +117,15 @@ class ProductoController extends Controller
     }
 
     /**
-     * Finds the TblProducto model based on its primary key value.
+     * Finds the TblComprobante model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return TblProducto the loaded model
+     * @return TblComprobante the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TblProducto::findOne(['id' => $id])) !== null) {
+        if (($model = TblComprobante::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

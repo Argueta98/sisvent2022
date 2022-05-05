@@ -96,7 +96,7 @@
                     [
                         'label' => 'Comprobantes', 'icon' => 'file-text',
                         'items' => [
-                            ['label' => 'Tipo de Comprobantes', 'url' => ['#'], 'icon' => ''],
+                            ['label' => 'Tipo de Comprobantes', 'url' => ['comprobante/index'], 'icon' => ''],
                             ['label' => 'Tiraje de Comprobantes','url' => ['#'], 'icon' => ''],
                         ]
 

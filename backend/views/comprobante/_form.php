@@ -1,6 +1,7 @@
 <?php
 
 
+
 use kartik\daterange\DateRangePicker;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\Select2;
@@ -15,7 +16,7 @@ use yii\helpers\Html;
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Categoria / Crear registro</h3>
+                <h3 class="card-title">Comprobante / Crear registro</h3>
             </div>
             <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); ?>
             <div class="card-body">
@@ -25,11 +26,21 @@ use yii\helpers\Html;
                             <?= Html::activeLabel($model, 'nombre', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'nombre', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
-                        <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'descripcion', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'descripcion', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
+                        
+                        <div class="col-md-3">
+                        <?= Html::activeLabel($model, 'estado', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'estado', ['showLabels' => false])->label('Estado')->widget(SwitchInput::class, [
+                                'value' => $model->estado, //checked status can change by db value
+                                'options' => ['uncheck' => 0, 'value' => 1], //value if not set ,default is 1
+                                'pluginOptions' => [
+                                    'handleWidth' => 60,
+                                    'onColor' => 'success',
+                                    'offColor' => 'danger',
+                                    'onText' => 'Activo',
+                                    'offText' => 'Inactivo'
+                                ]
+                            ]); ?>
                         </div>
-                    
                       
                     </div>
                     <div class="card-footer text-right">

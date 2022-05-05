@@ -1,37 +1,34 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
-/* @var $model app\models\TblPresentacion */
-
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Presentacions'), 'url' => ['index']];
+Yii::$app->formatter->locale = 'en-US';
+$this->title = 'Detalle Presentacion';
+$this->params['breadcrumbs'][] = ['label' => 'Listado', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
 ?>
-<div class="tbl-presentacion-view">
 
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Eliminar'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', '¿Desea eliminar el siguiente registro?'),
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'nombre',
-            'descripcion',
-        ],
-    ]) ?>
-
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title"><?= $model->nombre ?></h3>
+            </div>
+            <div class="card-body">
+                <table class="table table-sm table-striped table-hover table-bordered">
+                    <tr>
+                        <td width="16%"><b>Nombre:</b></td>
+                        <td width="34%"><?= $model->nombre ?></td>
+                        <td width="16%"><b>Descripción:</b></td>
+                        <td width="34%"> <?= $model->descripcion?></td>
+                    </tr>
+                    
+                </table>
+            </div>
+            <div class="card-footer">
+                <?= Html::a(Yii::t('app', 'Actualizar'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                <?php echo Html::a('<i class="fa fa-ban"></i> Cancelar', ['index'], ['class' => 'btn btn-danger', 'data-toggle' => 'tooltip', 'title' => 'Cancelar']) ?>
+            </div>
+        </div>
+    </div>
 </div>
