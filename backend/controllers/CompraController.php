@@ -3,7 +3,12 @@
 namespace backend\controllers;
 
 use app\models\TblCompra;
+use app\models\TblInventario;
+use app\models\TblCompradetalle;
+use app\models\CompraDetalleSearch;
 use app\models\CompraSearch;
+use app\models\TblComprobante;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,8 +60,14 @@ class CompraController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new CompraDetalleSearch();
+        $searchModel->idCompra = $id;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -69,10 +80,10 @@ class CompraController extends Controller
     {
         $model = new TblCompra();
 
-        
         if ($model->load($this->request->post())) {
-            $model->fecha_compra = date('Y-m-d H:i:s');
+           // $model->fecha_compra = date('Y-m-d H:i:s');
             $model->fecha_creacion = date('Y-m-d H:i:s');
+            $model->numero_compra = $this->CreateCode1();
            // $model->id_user = 1;
             
             if (!$model->save()){
@@ -86,20 +97,94 @@ class CompraController extends Controller
                 'model' => $model,
             ]);
         }
-
-      /*  if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            }
-        } else {
-            $model->loadDefaultValues();
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);*/
     }
 
+    function CreateCode1()
+    {
+        $compra = TblCompra::find()->orderBy(['id' => SORT_DESC])->one();
+        if (empty($compra->numero_compra)) $codigo = 0;
+        else $codigo = $compra->numero_compra;
+
+        $int = intval(preg_replace('/[^0-9]+/', '', $codigo), 10);
+        $id = $int + 1;
+
+        $numero = $id;
+        $tmp = "";
+        if ($id < 10) {
+            $tmp .= "000";
+            $tmp .= $id;
+        } elseif ($id >= 10 && $id < 100) {
+            $tmp .= "00";
+            $tmp .= $id;
+        } elseif ($id >= 100 && $id < 1000) {
+            $tmp .= "0";
+            $tmp .= $id;
+        } else {
+            $tmp .= $id;
+        }
+        $result = str_replace($id, $tmp, $numero);
+        return "CB-" . $result;
+    }
+
+
+    public function actionInventario($idCompra)
+    {
+        $detCompra = TblCompradetalle::find()->where('idCompra = '. $idCompra)->all();
+        try{
+            foreach ($detCompra as $det){
+
+                $modelInventario = new TblInventario();
+    
+                $modelInventario->idCompra = $idCompra;
+                $modelInventario->idProducto = $det->idProducto;
+                $modelInventario->existencias = $det->cantidad;
+                $modelInventario->cant_original = $det->cantidad;
+                $modelInventario->numero_entrada = $this->CreateCode();
+                $modelInventario->fechacreacion = date('Y-m-d H:i:s');
+                $modelInventario->save();
+
+        }
+    
+        } catch( Exception $e)
+        {
+            echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+        }
+
+         return $this->redirect(['view', 'id' => $idCompra]);
+    }
+
+    function CreateCode()
+    {
+        $inventario = TblInventario::find()->orderBy(['id' => SORT_DESC])->one();
+        if (empty($inventario->cod_inventario)) $codigo = 0;
+        else $codigo = $inventario->cod_inventario;
+
+        $int = intval(preg_replace('/[^0-9]+/', '', $codigo), 10);
+        $id = $int + 1;
+
+        $numero = $id;
+        $tmp = "";
+        if ($id < 10) {
+            $tmp .= "000";
+            $tmp .= $id;
+        } elseif ($id >= 10 && $id < 100) {
+            $tmp .= "00";
+            $tmp .= $id;
+        } elseif ($id >= 100 && $id < 1000) {
+            $tmp .= "0";
+            $tmp .= $id;
+        } else {
+            $tmp .= $id;
+        }
+        $result = str_replace($id, $tmp, $numero);
+        return "INV-" . $result;
+    }
+
+
+       /*echo '<pre>';
+        echo print_r($detCompra);
+        echo '</pre>';
+        die();*/
     /**
      * Updates an existing TblCompra model.
      * If update is successful, the browser will be redirected to the 'view' page.

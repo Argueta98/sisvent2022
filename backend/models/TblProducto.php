@@ -41,13 +41,14 @@ class TblProducto extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['codigo', 'nombre', 'descripcion', 'existencias', 'fecha_creacion'], 'required'],
+            [['codigo', 'nombre', 'fecha_creacion'], 'required'],
             [['idCategoria', 'idPresentacion'], 'integer'],
-            [['existencias'], 'number'],
             [['fecha_creacion'], 'safe'],
             [['codigo'], 'string', 'max' => 50],
             [['nombre'], 'string', 'max' => 100],
-            [['descripcion'], 'string', 'max' => 200],
+            [['precio_compra'], 'number'],
+            [['precio_venta'], 'number'],
+            [['stock_min'], 'number'],
             [['idCategoria'], 'exist', 'skipOnError' => true, 'targetClass' => TblCategoria::class, 'targetAttribute' => ['idCategoria' => 'id']],
             [['idPresentacion'], 'exist', 'skipOnError' => true, 'targetClass' => TblPresentacion::class, 'targetAttribute' => ['idPresentacion' => 'id']],
         ];
@@ -64,7 +65,6 @@ class TblProducto extends \yii\db\ActiveRecord
             'nombre' => Yii::t('app', 'Producto'),
             'descripcion' => Yii::t('app', 'Descripcion'),
             'idCategoria' => Yii::t('app', 'Categoria'),
-            'existencias' => Yii::t('app', 'Existencias'),
             'idPresentacion' => Yii::t('app', 'Presentacion'),
            'fecha_creacion' => Yii::t('app', 'Fecha Creacion'),
         ];
@@ -99,15 +99,20 @@ class TblProducto extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TblPresentacion::class, ['id' => 'idPresentacion']);
     }
+    public function getPrecio()
+    {
+        return $this->hasOne(TblPrecio::class, ['id' => 'idPrecio']);
+    }
+
 
     /**
      * Gets query for [[Inventarios]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getInventarios()
+    public function getInventario()
     {
-        return $this->hasMany(TblInventario::className(), ['idProducto' => 'id']);
+        return $this->hasMany(TblInventario::class, ['idProducto' => 'id']);
     }
 
     /**

@@ -17,10 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <table class="table table-sm table-striped table-hover table-bordered">
                     <tr>
-                        <td width="16%"><b>Nombre:</b></td>
-                        <td width="34%"><?= $model->nombre ?></td>
-                        <td width="16%"><b>Descripción:</b></td>
-                        <td width="34%"> <?= $model->descripcion?></td>
+                        <td width="12%"><b>Nombre:</b></td>
+                        <td width="20%"><?= $model->nombre ?></td>
+                        <td width="12%"><b>Siglas:</b></td>
+                        <td width="20%"> <?= $model->descripcion?></td>
+                        <td width="12%"><b>Estado:</b></td>
+                        <td width="20%"><span class="badge bg-<?= $model->estado == 1 ? "green" : "red"; ?>"><?= $model->estado == 1 ? "Activo" : "Inactivo"; ?></span></td>
                     </tr>
                     
                 </table>

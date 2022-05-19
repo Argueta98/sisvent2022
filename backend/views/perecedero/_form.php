@@ -24,25 +24,7 @@ use yii\helpers\Html;
             <div class="card-body">
                  <form role="form">    
                     <div class="row">
-                        <div class="col-md-6">
-                                    <?= Html::activeLabel($model, 'fecha_vencimiento', ['class' => 'control-label']) ?>
-                                    <br>
-                                    <?=  DatePicker::widget([
-                                            'name' => 'fecha_vencimiento',
-                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                            'value' => '01-Ene-2022',
-                                            'pluginOptions' => [
-                                                'autoclose' => true,
-                                                'format' => 'dd-M-yyyy'
-                                            ]
-                                        ]);?>  
-                        </div>
-                        <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'cantidad_percedero', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'cantidad_percedero', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
-                        </div>
-                        
-                        <div class="col-md-6">
+                    <div class="col-md-6">
                             <?= Html::activeLabel($model, 'idProducto', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'idproducto', ['showLabels' => false])->widget(Select2::className(), [
                                 'data' => ArrayHelper::map(TblProducto::find()->all(), 'id', 'nombre'),
@@ -51,6 +33,20 @@ use yii\helpers\Html;
                                 'pluginOptions' => ['allowClear' => true],
                             ]); ?>
                         </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'fecha_vencimiento', ['class' => 'control-label']) ?>
+                                    <br>
+                            <?= $form->field($model, 'fecha_vencimiento', ['showLabels' => false])->widget(DatePicker::class, [
+                            'options' => ['placeholder' => 'Seleccionar fecha Vencimiento'],
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-m-dd', 'todayHighlight' => true],
+                        ]); ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'cantidad_percedero', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'cantidad_percedero', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
+                        </div>
+                        
+                       
                         <div class="col-md-3">
                         <?= Html::activeLabel($model, 'estado', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'estado', ['showLabels' => false])->label('Estado')->widget(SwitchInput::class, [

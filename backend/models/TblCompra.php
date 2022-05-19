@@ -37,10 +37,10 @@ class TblCompra extends \yii\db\ActiveRecord
         return [
             [['idProveedor', 'idComprobante'], 'integer'],
             [['serie', 'numero_compra', 'fecha_compra', 'fecha_creacion'], 'required'],
-            [['fecha_compra', 'fecha_creacion'], 'safe'],
             [['serie', 'numero_compra'], 'string', 'max' => 50],
             [['idProveedor'], 'exist', 'skipOnError' => true, 'targetClass' => TblProveedor::className(), 'targetAttribute' => ['idProveedor' => 'id']],
             [['idComprobante'], 'exist', 'skipOnError' => true, 'targetClass' => TblComprobante::className(), 'targetAttribute' => ['idComprobante' => 'id']],
+            
         ];
     }
 
@@ -60,6 +60,8 @@ class TblCompra extends \yii\db\ActiveRecord
         ];
     }
 
+  
+
     /**
      * Gets query for [[Compradetalles]].
      *
@@ -75,9 +77,9 @@ class TblCompra extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdComprobante0()
+    public function getComprobante()
     {
-        return $this->hasOne(Comprobante::className(), ['id' => 'idComprobante']);
+        return $this->hasOne(TblComprobante::class, ['id' => 'idComprobante']);
     }
 
     /**
@@ -85,8 +87,31 @@ class TblCompra extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdProveedor0()
+    public function getProveedor()
     {
-        return $this->hasOne(Proveedor::className(), ['id' => 'idProveedor']);
+        return $this->hasOne(TblProveedor::class, ['id' => 'idProveedor']);
     }
+
+    public static function getTotal($provider, $fieldName1, $fieldName2)
+    {
+        $total = 0;
+    
+        foreach ($provider as $item) {
+            $total += $item[$fieldName1] *  $item[$fieldName2];
+        }
+    
+        $total = number_format( $total, 2 );
+    
+        return $total;
+    }
+
+    public static function getMulti()
+    {
+        foreach ($results as $result){
+            $total = $result->cantidad * $result->precio_unitario;
+        }
+        return $total;
+    }
+    
+
 }

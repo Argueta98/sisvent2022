@@ -54,6 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
                     'attribute' => 'descripcion',
                     'vAlign' => 'middle',
                     'format' => 'html',
@@ -68,6 +69,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             'allowClear' => true
                         ],
                     ],
+                ],
+                [
+                    'class' => 'kartik\grid\BooleanColumn',
+                    'trueLabel' => 'Si',
+                    'falseLabel' => 'No',
+                    'attribute' => 'estado',
+                    'width' => '50px',
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('descripcion')->all(), 'id', 'estado'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                    'vAlign' => 'middle',
                 ],
    
      

@@ -18,8 +18,7 @@ class ProductoSearch extends TblProducto
     {
         return [
             [['id', 'idCategoria', 'idPresentacion'], 'integer'],
-            [['codigo', 'nombre', 'descripcion', 'fecha_creacion'], 'safe'],
-            [['existencias'], 'number'],
+            [['codigo', 'nombre','precio_compra' ,'precio_venta','stock_min', 'fecha_creacion'], 'safe'],
         ];
     }
 
@@ -61,14 +60,16 @@ class ProductoSearch extends TblProducto
         $query->andFilterWhere([
             'id' => $this->id,
             'idCategoria' => $this->idCategoria,
-            'existencias' => $this->existencias,
             'idPresentacion' => $this->idPresentacion,
             'fecha_creacion' => $this->fecha_creacion,
         ]);
 
         $query->andFilterWhere(['like', 'codigo', $this->codigo])
             ->andFilterWhere(['like', 'nombre', $this->nombre])
-            ->andFilterWhere(['like', 'descripcion', $this->descripcion]);
+            ->andFilterWhere(['like', 'precio_compra', $this->precio_compra])
+            ->andFilterWhere(['like', 'precio_venta', $this->precio_venta])
+            ->andFilterWhere(['like', 'stock_min', $this->stock_min]);
+          
 
         return $dataProvider;
     }

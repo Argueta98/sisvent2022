@@ -32,9 +32,9 @@ class TblCompradetalle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idCompra', 'idProducto'], 'integer'],
+            [['idCompra', 'idProducto','cantidad'], 'integer'],
             [['cantidad'], 'required'],
-            [['cantidad', 'precio_unitario'], 'number'],
+            [['precio_unitario'], 'number'],
             [['idCompra'], 'exist', 'skipOnError' => true, 'targetClass' => TblCompra::className(), 'targetAttribute' => ['idCompra' => 'id']],
             [['idProducto'], 'exist', 'skipOnError' => true, 'targetClass' => TblProducto::className(), 'targetAttribute' => ['idProducto' => 'id']],
         ];
@@ -47,10 +47,11 @@ class TblCompradetalle extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'idCompra' => Yii::t('app', ' N° Compra'),
+            'idCompra' => Yii::t('app', 'N° Comprobante'),
             'idProducto' => Yii::t('app', 'Producto'),
             'cantidad' => Yii::t('app', 'Cantidad'),
-            'precio_unitario' => Yii::t('app', 'Precio Unitario'),
+            'precio_unitario' => Yii::t('app', 'Costo'),
+            
         ];
     }
 
@@ -59,9 +60,9 @@ class TblCompradetalle extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdCompra0()
+    public function getCompra()
     {
-        return $this->hasOne(Compra::className(), ['id' => 'idCompra']);
+        return $this->hasOne(TblCompra::class, ['id' => 'idCompra']);
     }
 
     /**
@@ -69,9 +70,16 @@ class TblCompradetalle extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getIdProducto0()
+    public function getProducto()
     {
-        return $this->hasOne(Producto::className(), ['id' => 'idProducto']);
+        return $this->hasOne(TblProducto::class, ['id' => 'idProducto']);
     }
 
+    public static function getMulti()
+    {
+        foreach ($results as $result){
+            $total = $result->cantidad * $result->precio_unitario;
+        }
+        return $total;
+    }
 }

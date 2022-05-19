@@ -3,6 +3,10 @@
 namespace backend\controllers;
 
 use app\models\TblCompradetalle;
+use app\models\TblComprobante;
+use app\models\ComprobanteSearch;
+use app\models\TblCompra;
+use app\models\CompraSearch;
 use app\models\CompraDetalleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -55,6 +59,7 @@ class CompraDetalleController extends Controller
      */
     public function actionView($id)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -67,11 +72,14 @@ class CompraDetalleController extends Controller
      */
     public function actionCreate()
     {
+    
+
         $model = new TblCompradetalle();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();

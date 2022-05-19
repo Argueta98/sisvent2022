@@ -72,7 +72,7 @@ class CategoriaController extends Controller
 
         if ($model->load($this->request->post())) {
             $model->fecha_creacion = date('Y-m-d H:i:s');
-            $model->fecha_actualizar = date('Y-m-d H:i:s');
+           
           //  $model->id_usuario = 1;
             
             if (!$model->save()){
@@ -110,9 +110,9 @@ class CategoriaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->fecha_actualizar = date('Y-m-d H:i:s');
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

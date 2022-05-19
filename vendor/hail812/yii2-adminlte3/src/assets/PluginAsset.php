@@ -17,7 +17,11 @@ class PluginAsset extends AssetBundle
         ],
         'icheck-bootstrap' => [
             'css' => ['icheck-bootstrap/icheck-bootstrap.css']
-        ]
+        ],
+        'sweetalert2' => [
+            'css' => 'sweetalert2-theme-bootstrap-4/bootstrap-4.min.css',
+            'js' => 'sweetalert2/sweetalert2.min.js'
+        ],
     ];
 
     /**
@@ -52,6 +56,6 @@ class PluginAsset extends AssetBundle
      */
     private function getPluginConfig($name)
     {
-        return self::$pluginMap[$name] ?? \Yii::$app->params['hail812/yii2-adminlte3']['pluginMap'][$name] ?? null;
+        return \Yii::$app->params['hail812/yii2-adminlte3']['pluginMap'][$name] ?? self::$pluginMap[$name] ?? null;
     }
 }

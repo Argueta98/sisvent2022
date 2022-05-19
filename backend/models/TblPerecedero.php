@@ -32,7 +32,6 @@ class TblPerecedero extends \yii\db\ActiveRecord
     {
         return [
             [['fecha_vencimiento', 'cantidad_percedero', 'idproducto'], 'required'],
-            [['fecha_vencimiento'], 'safe'],
             [['cantidad_percedero'], 'number'],
             [['estado', 'estado'], 'integer'],
             [['idproducto'], 'unique'],
@@ -48,7 +47,7 @@ class TblPerecedero extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'fecha_vencimiento' => Yii::t('app', 'Fecha Vencimiento'),
-            'cantidad_percedero' => Yii::t('app', 'Cantidad Percedero'),
+            'cantidad_percedero' => Yii::t('app', 'Cantidad'),
             'idproducto' => Yii::t('app', 'Producto'),
             'estado' => Yii::t('app', 'Estado'),
         ];

@@ -32,10 +32,6 @@ use yii\helpers\Html;
                             <?= Html::activeLabel($model, 'nombre', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'nombre', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
-                        <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'descripcion', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'descripcion', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
-                        </div>
 
 
                    
@@ -50,13 +46,6 @@ use yii\helpers\Html;
                             ]); ?>
                         </div>
 
-
-
-                        <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'existencias', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'existencias', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
-                        </div>
-
                         <!--MODIFICAR YA QUE NO MUESTRA LA VISTA BIEN-->
                         <div class="col-md-6">
                         <?= Html::activeLabel($model, 'idPresentacion', ['class' => 'control-label']) ?>
@@ -66,6 +55,18 @@ use yii\helpers\Html;
                                 'options' => ['placeholder' => '- Seleccionar Presentacion -'],
                                 'pluginOptions' => ['allowClear' => true],
                             ]); ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'precio_compra', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'precio_compra', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'precio_venta', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'precio_venta', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
+                        </div>
+                        <div class="col-md-6">
+                            <?= Html::activeLabel($model, 'stock_min', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'stock_min', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
                       
                     </div>

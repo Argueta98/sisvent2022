@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'html',
                     'value' => function($model){
                         $compra = TblCompra::findOne($model->idCompra);
-                        return $compra->numero_compra;
+                        return Html::tag('h4', $compra->numero_compra, ['class' => 'badge bg-success']); //$compra->numero_compra
                     } ,
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCompra::find()->orderBy('id')->all(), 'id', 'numero_compra'),
@@ -62,7 +62,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'html',
                     'value' => function($model){
                         $producto = TblProducto::findOne($model->idProducto);
-                        return $producto->nombre;
+                        return Html::tag('span', $producto->nombre); //$producto->nombre;
                     } ,
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hAlign' => 'center',
                     'format' => 'html',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->cantidad, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->cantidad, ['class' => 'badge bg-info']);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCompradetalle::find()->orderBy('id')->all(), 'cantidad', 'cantidad'),
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hAlign' => 'center',
                     'attribute' => 'precio_unitario',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->precio_unitario, ['class' => 'badge bg-info']);
+                        return Html::tag('b', $model->precio_unitario);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCompradetalle::find()->orderBy('id')->all(), 'id', 'cantidad'),

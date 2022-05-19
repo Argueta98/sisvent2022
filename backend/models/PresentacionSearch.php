@@ -18,7 +18,7 @@ class PresentacionSearch extends TblPresentacion
     {
         return [
             [['id'], 'integer'],
-            [['nombre', 'descripcion'], 'safe'],
+            [['nombre', 'descripcion','estado'], 'safe'],
         ];
     }
 

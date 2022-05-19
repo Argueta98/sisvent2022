@@ -48,37 +48,17 @@ use yii\helpers\Html;
                             <?= Html::activeLabel($model, 'serie', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'serie', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
+                        
                         <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'numero_compra', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'numero_compra', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
-                        </div>
-                        <div class="col-md-6">
-                                    <?= Html::activeLabel($model, 'fecha_compra', ['class' => 'control-label']) ?>
+                            <?= Html::activeLabel($model, 'fecha_compra', ['class' => 'control-label']) ?>
                                     <br>
-                                    <?=  DatePicker::widget([
-                                            'name' => 'fecha_compra',
-                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                            'value' => '01-Ene-2022',
-                                            'pluginOptions' => [
-                                                'autoclose' => true,
-                                                'format' => 'dd-M-yyyy'
-                                            ]
-                                        ]);?>  
+                            <?= $form->field($model, 'fecha_compra', ['showLabels' => false])->widget(DatePicker::class, [
+                            'options' => ['placeholder' => 'Seleccionar fecha Compra'],
+                            'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-m-dd', 'todayHighlight' => true],
+                        ]); ?>
                         </div>
-                        <div class="col-md-6">
-                                    <?= Html::activeLabel($model, 'fecha_creacion', ['class' => 'control-label']) ?>
-                                    <br>
-                                    <?=  DatePicker::widget([
-                                            'name' => 'fecha_creacion',
-                                            'type' => DatePicker::TYPE_COMPONENT_PREPEND,
-                                            'value' => '01-Ene-2022',
-                                            'pluginOptions' => [
-                                                'autoclose' => true,
-                                                'format' => 'dd-M-yyyy'
-                                            ]
-                                        ]);?>  
-                        </div>
-                    </div>
+                        
+                       
 
 
                     <div class="card-footer text-right">

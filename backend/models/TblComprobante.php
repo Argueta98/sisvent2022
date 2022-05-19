@@ -51,8 +51,8 @@ class TblComprobante extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getCompras()
+    public function getCompra()
     {
-        return $this->hasMany(Compra::className(), ['idComprobante' => 'id']);
+        return $this->hasMany(TblCompra::class, ['idComprobante' => 'id']);
     }
 }

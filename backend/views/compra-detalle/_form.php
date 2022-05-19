@@ -29,7 +29,6 @@ use yii\helpers\Html;
                     <div class="row">
                     <div class="col-md-6">
                             <?= Html::activeLabel($model, 'idCompra', ['class' => 'control-label']) ?>
-                            <?= Html::a('<i class="fa fa-plus"></i> Agregar Compra', ['compra/create'], ['class' => 'btn btn-success']) ?><br><br>
                             <?= $form->field($model, 'idCompra', ['showLabels' => false])->widget(Select2::className(), [
                                 'data' => ArrayHelper::map(TblCompra::find()->all(), 'id', 'numero_compra'),
                                 'language' => 'es',
@@ -38,11 +37,9 @@ use yii\helpers\Html;
                             ]); ?>
                             
                         </div>
-                       
-                        
                         
                         <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'idProducto', ['class' => 'control-label']) ?><br><br>
+                            <?= Html::activeLabel($model, 'idProducto', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'idProducto', ['showLabels' => false])->widget(Select2::className(), [
                                 'data' => ArrayHelper::map(TblProducto::find()->all(), 'id', 'nombre'),
                                 'language' => 'es',
@@ -58,6 +55,7 @@ use yii\helpers\Html;
                             <?= Html::activeLabel($model, 'precio_unitario', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'precio_unitario', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
+                        
                       
                        
                     </div>

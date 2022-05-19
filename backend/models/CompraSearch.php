@@ -18,7 +18,7 @@ class CompraSearch extends TblCompra
     {
         return [
             [['id', 'idProveedor'], 'integer'],
-            [['serie', 'numero_compra', 'fecha_compra', 'fecha_creacion'], 'safe'],
+            [['serie', 'numero_compra', 'fecha_compra', 'fecha_creacion','idComprobante'], 'safe'],
         ];
     }
 
@@ -62,6 +62,7 @@ class CompraSearch extends TblCompra
             'idProveedor' => $this->idProveedor,
             'fecha_compra' => $this->fecha_compra,
             'fecha_creacion' => $this->fecha_creacion,
+            'fecha_creacion' => $this->idComprobante,
         ]);
 
         $query->andFilterWhere(['like', 'serie', $this->serie])

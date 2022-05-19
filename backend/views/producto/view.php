@@ -23,19 +23,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td width="34%"> <?= $model->nombre?></td>
                     </tr>
                     <tr>
-                        <td width="16%"><b>Descripcion:</b></td>
-                        <td width="34%"><?= $model->descripcion ?></td>
                         <td width="16%"><b>Categoria:</b></td>
                         <td width="34%"> <?= $model->categoria->nombre?></td>
-                    </tr>
-                    <tr>
-                        <td width="16%"><b>Existencias:</b></td>
-                        <td width="34%"><?= $model->existencias ?></td>
                         <td width="16%"><b>Presentacion:</b></td>
                         <td width="34%"> <?= $model->presentacion->nombre?></td>
                     </tr>
+                    <tr>
+                        <td width="16%"><b>S.Min:</b></td>
+                        <td width="34%"> <?= $model->stock_min?></td>
+                        <td width="16%"><b>P.Compra:</b></td>
+                        <td width="34%"> <?= $model->precio_compra?></td>
+                        
+                    </tr>
+                    <tr>
+                        <td width="16%"><b>P.Venta:</b></td>
+                        <td width="34%"> <?= $model->precio_venta?></td>
                         <td><b>Fecha creacion:</b></td>
                         <td><?= date('d-m-Y H:i:s', strtotime($model->fecha_creacion)) ?></td>
+                    </tr>
                        
                     
                 </table>

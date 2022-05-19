@@ -33,6 +33,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => '#',
                     'headerOptions' => ['class' => 'kartik-sheet-style']
                 ],
+               
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'attribute' => 'idproducto',
+                    'width' => '200px',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'format' => 'html',
+                    'value' => function($model){
+                        $producto = TblProducto::findOne($model->idproducto);
+                        return $producto->nombre;
+                    } ,
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
                 [
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'fecha_vencimiento',
@@ -40,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'width' => '250px',
+                    'width' => '100px',
                     'filterType' => GridView::FILTER_DATE,
                     'filterWidgetOptions' => ([
                         'model' => $dataProvider,
@@ -62,7 +83,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hAlign' => 'center',
                     'attribute' => 'cantidad_percedero',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->cantidad_percedero, ['class' => 'badge ']);
+                        return Html::tag('span', $model->cantidad_percedero);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPerecedero::find()->orderBy('cantidad_percedero')->all(), 'id', 'cantidad_percedero'),
@@ -74,25 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ],
 
-                [
-                    'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'idproducto',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => function($model){
-                        $producto = TblProducto::findOne($model->idproducto);
-                        return $producto->nombre;
-                    } ,
-                    'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
-                    'filterWidgetOptions' => [
-                        'options' => ['placeholder' => 'Todos...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ],
-                ],
+               
                 [
                     'class' => 'kartik\grid\BooleanColumn',
                     'trueLabel' => 'Si',

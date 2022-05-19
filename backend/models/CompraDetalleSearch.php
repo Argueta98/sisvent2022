@@ -18,7 +18,7 @@ class CompraDetalleSearch extends TblCompradetalle
     {
         return [
             [['id', 'idCompra', 'idProducto'], 'integer'],
-            [['cantidad'], 'number'],
+            [['cantidad','precio_unitario'], 'number'],
         ];
     }
 

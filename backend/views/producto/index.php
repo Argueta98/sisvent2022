@@ -58,9 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
+                    'value' => 'nombre',
+                   /* 'value' => function ($model, $key, $index, $widget) {
                         return Html::a($model->nombre,  ['view', 'nombre' => $model->id]);
-                    },
+                    },*/
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProducto::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
@@ -92,25 +93,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
-                    'format' => 'raw',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'attribute' => 'existencias',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->existencias, ['class' => 'badge bg-purple']);
-                    },
-                    'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('existencias')->all(), 'id', 'existencias'),
-                    'filterWidgetOptions' => [
-                        'options' => ['placeholder' => 'Todos...'],
-                        'pluginOptions' => [
-                            'allowClear' => true
-                        ],
-                    ],
-                ],
-                [
-                    'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idPresentacion',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
@@ -129,6 +111,66 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ],
                 ],
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
+                    'format' => 'raw',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'attribute' => 'stock_min',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->stock_min, ['class' => 'badge bg-warning ']);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('stock_min')->all(), 'stock_min', 'stock_min'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+               
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
+                    'format' => 'raw',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'attribute' => 'precio_compra',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->precio_compra);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('precio_compra')->all(), 'precio_compra', 'precio_compra'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
+                    'format' => 'raw',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'attribute' => 'precio_venta',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->precio_venta);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblProducto::find()->orderBy('precio_venta')->all(), 'precio_venta', 'precio_venta'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+            
+                
                
                
                 [

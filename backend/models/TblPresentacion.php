@@ -31,7 +31,8 @@ class TblPresentacion extends \yii\db\ActiveRecord
         return [
             [['nombre', 'descripcion'], 'required'],
             [['nombre'], 'string', 'max' => 50],
-            [['descripcion'], 'string', 'max' => 100],
+            [['descripcion'], 'string', 'max' => 30],
+            [['estado', 'estado'], 'integer'],
         ];
     }
 
@@ -43,7 +44,8 @@ class TblPresentacion extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'nombre' => Yii::t('app', 'Nombre'),
-            'descripcion' => Yii::t('app', 'Descripcion'),
+            'descripcion' => Yii::t('app', 'Siglas'),
+            'estado' => Yii::t('app', 'Estado'),
         ];
     }
 

@@ -29,6 +29,21 @@ use yii\jui\DatePicker;
                             <?= Html::activeLabel($model, 'descripcion', ['class' => 'control-label']) ?>
                             <?= $form->field($model, 'descripcion', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
+                        <div class="col-md-3">
+                        <?= Html::activeLabel($model, 'estado', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'estado', ['showLabels' => false])->label('Estado')->widget(SwitchInput::class, [
+                                'value' => $model->estado, //checked status can change by db value
+                                'options' => ['uncheck' => 0, 'value' => 1], //value if not set ,default is 1
+                                'pluginOptions' => [
+                                    'handleWidth' => 60,
+                                    'onColor' => 'success',
+                                    'offColor' => 'danger',
+                                    'onText' => 'Activo',
+                                    'offText' => 'Inactivo'
+                                ]
+                            ]); ?>
+                        </div>
+                    </div>
                       
                     </div>
                     <div class="card-footer text-right">

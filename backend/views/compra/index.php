@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $comprobante->nombre;
                     },
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblComprobante::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
+                    'filter' => ArrayHelper::map(TblComprobante::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -186,10 +186,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' =>  [
                     [
                         'content' =>
-                        Html::a('<i class="fas fa-redo"></i> Volver', ['compra-detalle/index'], [
+                        Html::a('<i class="far fa-eye"></i> Ver Detalle', ['compra-detalle/index'], [
                             'class' => 'btn btn-info',
                             'data-pjax' => 0,
-                        ]) . ' ' .
+                        ]) . ' ' . 
                         Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,
