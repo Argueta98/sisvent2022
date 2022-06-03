@@ -3,16 +3,16 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TblComprobante */
+/* @var $model app\models\TblEmpleado */
 
-$this->title = Yii::t('app', 'Actualizar Comprobante: {name}', [
-    'name' => $model->id,
+$this->title = Yii::t('app', 'Actualizar Empleado: {name}', [
+    'name' => $model->nombres,
 ]);
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', ' Comprobantes'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Empleados'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Actualizar');
 ?>
-<div class="tbl-comprobante-update">
+<div class="tbl-empleado-update">
 
     <?= $this->render('_form', [
         'model' => $model,

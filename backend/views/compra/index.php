@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'idProveedor',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
+                    'width' => '300px',
                     'format' => 'html',
                     'value' => function($model){
                         $proveedor = TblProveedor::findOne($model->idProveedor);
@@ -57,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idComprobante',
                     'vAlign' => 'middle',
+                    
                     'hAlign' => 'center',
                     'format' => 'html',
                     'value' => function($model){

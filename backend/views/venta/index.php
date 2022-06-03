@@ -1,9 +1,10 @@
 <?php
 Yii::$app->language = 'es_ES';
 
-use app\models\TblCategoria;
-use app\models\TblPresentacion;
-use app\models\TblProducto;
+use app\models\TblProveedor;
+use app\models\TblVenta;
+use app\models\TblCliente;
+use app\models\TblEmpleado;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -14,7 +15,7 @@ use kartik\export\ExportMenu;
 /* @var $searchModel backend\models\OsigSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listado de Categorias';
+$this->title = 'Ventas Realizadas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -35,16 +36,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
-                    'format' => 'raw',
+                    'attribute' => 'num_venta',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'attribute' => 'nombre',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->nombre, ['class' => 'badge bg-info ']);
-                    },
+                    'width' => '300px',
+                    'format' => 'html',
+                    'value' => 'num_venta',
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
+                    'filter' => ArrayHelper::map(TblVenta::find()->orderBy('num_venta')->all(), 'id', 'num_venta'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -54,16 +53,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '150px',
-                    'format' => 'raw',
+                    'attribute' => 'idCliente',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'attribute' => 'descripcion',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->descripcion, ['class' => 'badge bg-info ']);
-                    },
+                    'width' => '300px',
+                    'format' => 'html',
+                    'value' => function($model){
+                        $cliente = TblCliente::findOne($model->idCliente);
+                        return $cliente->nombre.''.$cliente->apellido;
+                    } ,
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('descripcion')->all(), 'descripcion', 'descripcion'),
+                    'filter' => ArrayHelper::map(TblCliente::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -73,37 +73,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'fecha_creacion',
-                    'headerOptions' => ['class' => 'kv-sticky-column'],
-                    'contentOptions' => ['class' => 'kv-sticky-column'],
+                    'attribute' => 'idEmpleado',
                     'vAlign' => 'middle',
-                    'hAlign' => 'right',
-                    'width' => '150px',
-                    'filterType' => GridView::FILTER_DATE,
-                    'filterWidgetOptions' => ([
-                        'model' => $dataProvider,
-                        'attribute' => 'fecha_creacion',
-                        'convertFormat' => true,
+                    'hAlign' => 'center',
+                    'width' => '300px',
+                    'format' => 'html',
+                    'value' => function($model){
+                        $empleado = TblEmpleado::findOne($model->idEmpleado);
+                        return $empleado->nombres.''.$empleado->apellidos;
+                    } ,
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('nombres')->all(), 'id', 'nombres'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
-                            'format' => 'yyyy-M-dd',
-                            'autoWidget' => true,
-                            'autoclose' => true,
-                            'todayHighlight' => true,
+                            'allowClear' => true
                         ],
-                    ]),
+                    ],
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'fecha_actualizar',
+                    'attribute' => 'fecha',
                     'headerOptions' => ['class' => 'kv-sticky-column'],
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
-                    'hAlign' => 'right',
-                    'width' => '150px',
+                    'hAlign' => 'center',
+                    'width' => '250px',
                     'filterType' => GridView::FILTER_DATE,
                     'filterWidgetOptions' => ([
                         'model' => $dataProvider,
-                        'attribute' => 'fecha_actualizar',
+                        'attribute' => 'fecha',
                         'convertFormat' => true,
                         'pluginOptions' => [
                             'format' => 'yyyy-M-dd',
@@ -113,12 +112,31 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]),
                 ],
+               
+                [
+                    'class' => 'kartik\grid\BooleanColumn',
+                    'trueLabel' => 'Finalizada',
+                    'falseLabel' => 'Proceso',
+                    'attribute' => 'estado',
+                    'width' => '120px',
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                    'vAlign' => 'middle',
+                ],
+               
               
+                
+                
                
                
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, \app\models\TblCategoria $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, \app\models\TblVenta $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
                 ],
@@ -147,6 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'toolbar' =>  [
                     [
                         'content' =>
+                        
                         Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,
@@ -171,8 +190,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'hover' => true,
                 //'showPageSummary'=>$pageSummary,
                 'panel' => [
-                    'type' => GridView::TYPE_PRIMARY,
-                    'heading' => 'Categorias',
+                    'type' => GridView::TYPE_SUCCESS,
+                    'heading' => 'Lista de Venta',
                 ],
                 'persistResize' => false,
             ]);

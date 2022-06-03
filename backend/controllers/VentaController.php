@@ -2,17 +2,16 @@
 
 namespace backend\controllers;
 
-use app\models\TblCategoria;
-use app\models\CategoriaSearch;
+use app\models\TblVenta;
+use app\models\VentaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-
 /**
- * CategoriaController implements the CRUD actions for TblCategoria model.
+ * VentaController implements the CRUD actions for TblVenta model.
  */
-class CategoriaController extends Controller
+class VentaController extends Controller
 {
     /**
      * @inheritDoc
@@ -33,13 +32,13 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Lists all TblCategoria models.
+     * Lists all TblVenta models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CategoriaSearch();
+        $searchModel = new VentaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +48,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Displays a single TblCategoria model.
+     * Displays a single TblVenta model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
@@ -62,33 +61,34 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Creates a new TblCategoria model.
+     * Creates a new TblVenta model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new TblCategoria();
+
+        $model = new TblVenta();
 
         if ($model->load($this->request->post())) {
-            $model->fecha_creacion = date('Y-m-d H:i:s');
-            $model->fecha_actualizar = date('Y-m-d H:i:s');
-           
-          //  $model->id_usuario = 1;
+            $model->fecha= date('Y-m-d H:i:s');
+            $model->num_venta = $this->CreateCode();
+            $model->idUsuario = 1;
             
             if (!$model->save()){
                print_r($model->getErrors());
                die(); 
             }
-            return $this->redirect(['index']);
+
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
+     /*   $model = new TblVenta();
 
-
-     /*   if ($this->request->isPost) {
+        if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
@@ -99,10 +99,38 @@ class CategoriaController extends Controller
         return $this->render('create', [
             'model' => $model,
         ]);*/
+
+    }
+
+    function CreateCode()
+    {
+        $venta= TblVenta::find()->orderBy(['id' => SORT_DESC])->one();
+        if (empty($venta->num_venta)) $codigo = 0;
+        else $codigo = $venta->num_venta;
+
+        $int = intval(preg_replace('/[^0-9]+/', '', $codigo), 10);
+        $id = $int + 1;
+
+        $numero = $id;
+        $tmp = "";
+        if ($id < 10) {
+            $tmp .= "000";
+            $tmp .= $id;
+        } elseif ($id >= 10 && $id < 100) {
+            $tmp .= "00";
+            $tmp .= $id;
+        } elseif ($id >= 100 && $id < 1000) {
+            $tmp .= "0";
+            $tmp .= $id;
+        } else {
+            $tmp .= $id;
+        }
+        $result = str_replace($id, $tmp, $numero);
+        return "VEN-" . $result;
     }
 
     /**
-     * Updates an existing TblCategoria model.
+     * Updates an existing TblVenta model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -111,9 +139,9 @@ class CategoriaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->fecha_actualizar = date('Y-m-d H:i:s');
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -122,7 +150,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Deletes an existing TblCategoria model.
+     * Deletes an existing TblVenta model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -136,15 +164,15 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Finds the TblCategoria model based on its primary key value.
+     * Finds the TblVenta model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return TblCategoria the loaded model
+     * @return TblVenta the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TblCategoria::findOne(['id' => $id])) !== null) {
+        if (($model = TblVenta::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

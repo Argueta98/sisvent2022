@@ -27,16 +27,7 @@ use yii\helpers\Html;
             <div class="card-body">
                  <form role="form">    
                     <div class="row">
-                    <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'idCompra', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'idCompra', ['showLabels' => false])->widget(Select2::className(), [
-                                'data' => ArrayHelper::map(TblCompra::find()->all(), 'id', 'numero_compra'),
-                                'language' => 'es',
-                                'options' => ['placeholder' => '- Seleccionar Numero Compra -'],
-                                'pluginOptions' => ['allowClear' => true],
-                            ]); ?>
-                            
-                        </div>
+                    
                         
                         <div class="col-md-6">
                             <?= Html::activeLabel($model, 'idProducto', ['class' => 'control-label']) ?>

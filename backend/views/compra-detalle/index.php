@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'header' => '#',
                     'headerOptions' => ['class' => 'kartik-sheet-style']
                 ],
-                [
+           /*     [
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idCompra',
                     'vAlign' => 'middle',
@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'allowClear' => true
                         ],
                     ],
-                ],
+                ],*/
                 [
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idProducto',

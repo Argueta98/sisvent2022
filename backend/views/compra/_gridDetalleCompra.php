@@ -4,7 +4,7 @@ Yii::$app->language = 'es_ES';
 use app\models\TblProveedor;
 use app\models\TblCompra;
 use app\models\TblProducto;
-use app\models\TblDetalleCompra;
+use app\models\TblCompradetalle;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -27,80 +27,85 @@ use kartik\export\ExportMenu;
                     'contentOptions' => ['class' => 'kartik-sheet-style'],
                     'width' => '36px',
                     'header' => '#',
-                    'headerOptions' => ['class' => 'kartik-sheet-style'],
-                    
+                    'headerOptions' => ['class' => 'kartik-sheet-style'], 
                 ],
-              /*  [
-                    'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'idCompra',
-                    'vAlign' => 'middle',
-                    'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => function($model){
-                        $compra= TblCompra::findOne($model->idCompra);
-                        return $compra->numero_compra;
-                    },
-                    'filter' => false,
-                ],*/
-                [
+                [//col-1
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'idProducto',
-                    'vAlign' => 'middle',
+                    //'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'format' => 'html',
                     'value' => function($model){
                         $producto= TblProducto::findOne($model->idProducto);
                         return $producto->nombre;
                     },
-                    'filter' => false,
+                    'filter' => false, 
                 ],
-                [
+                [ //col-2
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'cantidad',
-                    'vAlign' => 'middle',
+                    //'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->cantidad, ['class' => 'badge bg-purple']);
-                    },
+                    'format' => ['decimal',2],
+                    
+                 /*   'value' => function ($model) {
+                        return Html::tag('span', $model->cantidad);
+                    },*/
                     'filter' => false,
                 ],
                 
-                [
+                [ //col-3
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'precio_unitario',
-                    'vAlign' => 'middle',
+                    //'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'format' => 'html',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->precio_unitario, ['class' => 'badge bg-purple']);
-                    },
+                    'format' => ['decimal',2],   
+                  /*  'value' => function ($model) {
+                        return Html::tag('span', $model->precio_unitario);
+                    },*/
                     'filter' => false,
+                    'pageSummary' => 'Total',
+                   // 'pageSummary' => true,
+                 //  'pageSummaryFunc' => GridView::F_SUM, 
                 ],
-                
-
-                 [// total,
-                    'attribute' => 'Total',
-                    'header'=> 'SUMA',
-                    'value' => function($data) {
-                        // show the amount in money format => 50,000.00
-                        return number_format($data['cantidad'], 2);
+                 [ //col-4
+                    'class' => 'kartik\grid\FormulaColumn',
+                    'header' => 'Exento',
+                   // 'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'value' => function ($model, $key, $index, $widget){
+                        $p = compact('model','key','index');
+                        return $widget->col(2, $p) * $widget->col(3, $p);
                     },
-                    'filter' => false, //disable the filter for this field
-                    // I create the summary function in my Invoice model
-                   'footer' => TblCompra::getTotal($dataProvider->models, 'cantidad', 'precio_unitario'),
+                    'width' => '10%',
+                    'format' => ['decimal',2],                
+                    'pageSummary' => true,
+                   'pageSummaryFunc' => GridView::F_SUM, 
                 ],
-
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, \app\models\TblCompradetalle $model, $key, $index, $column) {
-                        return Url::toRoute([$action, 'id' => $model->id]);
-                    }
+                    'header' => 'Eliminar',
+                    'template' => '{delete}',
+                   /* 'buttons'=>[
+                        'delete' => function ($url, $model) {	
+                          return Html::a('<span class="glyphicon glyphicon-remove"></span>',$url, ['title' => Yii::t('yii', 'Delete'),
+                        ]);
+                                      
+                        }
+                    ],*/
+                  /*  'urlCreator' => function ($action, $model, $key, $index) {
+
+                        if ($action === 'delete') {
+                
+                            $url = Yii::$app->controller->createUrl('compradetalle/'); // your own url generation logic
+                
+                            return $url;
+                
+                        }
+                
+                    }*/
                 ],
-               
             ];
-
-
 
             $exportmenu = ExportMenu::widget([
                 'dataProvider' => $dataProvider,
@@ -116,7 +121,8 @@ use kartik\export\ExportMenu;
                 'id' => 'kv-compra',
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
-                'showFooter' => true,
+                //'showFooter' => true,
+                'showPageSummary' => true,
                 'columns' => $gridColumns,
                 'containerOptions' => ['style' => 'overflow: auto'], // only set when $responsive = false
                 'headerRowOptions' => ['class' => 'kartik-sheet-style'],
@@ -127,7 +133,8 @@ use kartik\export\ExportMenu;
                     [
                         'content' =>
                        
-                        Html::a('<i class="fas fa-plus"></i> Agregar', ['compra-detalle/create'], [
+                       
+                        Html::a('<i class="fas fa-plus"></i> Agregar', ['compra-detalle/create', 'id' => $model->id], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,
                         ]), 
@@ -147,7 +154,7 @@ use kartik\export\ExportMenu;
                 'hover' => true,
                 //'showPageSummary'=>$pageSummary,
                 'panel' => [
-                    'type' => GridView::TYPE_PRIMARY,
+                    'type' => GridView::TYPE_SUCCESS,
                     'heading' => 'Items',
                 ],
                 'persistResize' => false,

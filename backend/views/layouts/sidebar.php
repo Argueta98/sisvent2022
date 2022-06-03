@@ -76,7 +76,7 @@
                         'label' => 'Ventas', 'icon' => 'shopping-cart',
                         'items' => [
                             ['label' => 'Clientes', 'url' => ['cliente/index'], 'icon' => ''],
-                            ['label' => 'Realizar Ventas','url' => ['#'], 'icon' => ''],
+                            ['label' => 'Realizar Ventas','url' => ['venta/index'], 'icon' => ''],
                             ['label' => 'Consultas', 'icon' => ''],
                             ['label' => 'Ventas por Dia','url' => ['#'], 'icon' => ''],
                             ['label' => 'Ventas por Fecha', 'icon' => ''],
@@ -105,7 +105,7 @@
                     [
                         'label' => 'Usuarios', 'icon' => 'users',
                         'items' => [
-                            ['label' => 'Empleado', 'url' => ['#'], 'icon' => ''],
+                            ['label' => 'Empleado', 'url' => ['empleado/index'], 'icon' => ''],
                             ['label' => 'Usuario','url' => ['#'], 'icon' => ''],
                         ]
 

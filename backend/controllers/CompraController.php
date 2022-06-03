@@ -156,8 +156,8 @@ class CompraController extends Controller
     function CreateCode()
     {
         $inventario = TblInventario::find()->orderBy(['id' => SORT_DESC])->one();
-        if (empty($inventario->cod_inventario)) $codigo = 0;
-        else $codigo = $inventario->cod_inventario;
+        if (empty($inventario->numero_entrada)) $codigo = 0;
+        else $codigo = $inventario->numero_entrada;
 
         $int = intval(preg_replace('/[^0-9]+/', '', $codigo), 10);
         $id = $int + 1;
@@ -219,6 +219,7 @@ class CompraController extends Controller
         return $this->redirect(['index']);
     }
 
+   
     /**
      * Finds the TblCompra model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

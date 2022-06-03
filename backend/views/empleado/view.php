@@ -3,8 +3,8 @@
 use yii\helpers\Html;
 
 Yii::$app->formatter->locale = 'en-US';
-$this->title = 'Ver Cliente';
-$this->params['breadcrumbs'][] = ['label' => 'Clientes', 'url' => ['index']];
+$this->title = 'Empleado';
+$this->params['breadcrumbs'][] = ['label' => 'Listado', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -12,26 +12,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title"><?= $model->nombre ?></h3>
+                <h3 class="card-title"><?= $model->codigo .'--'.$model->nombres.' '. $model->apellidos?></h3>
             </div>
             <div class="card-body">
                 <table class="table table-sm table-striped table-hover table-bordered">
                     <tr>
-                        <td width="10%"><b>Nombres:</b></td>
-                        <td width="30%"><?= $model->nombre ?></td>
+                        <td width="16%"><b>Codigo:</b></td>
+                        <td width="36%"><?= $model->codigo ?></td>
+                    </tr>
+                   
+                    <tr><td width="16%"><b>Nombres:</b></td>
+                        <td width="34%"> <?= $model->nombres?></td>
                         <td width="16%"><b>Apellidos:</b></td>
-                        <td width="30%"> <?= $model->apellido ?></td>
+                        <td width="34%"><?= $model->codigo ?></td>
                     </tr>
                     <tr>
-                        <td width="10%"><b>Direccion:</b></td>
-                        <td width="30%"><?= $model->direccion ?></td>
-                        <td width="16%"><b>Telefono:</b></td>
-                        <td width="34%"> <?= $model->telefono?></td>
+                        <td width="16%"><b>correo:</b></td>
+                        <td width="34%"> <?= $model->correo?></td>
+                        <td width="16%"><b>Direccion:</b></td>
+                        <td width="34%"><?= $model->direccion ?></td>
                     </tr>
-                        <td width="10%"><b>Correo:</b></td>
-                        <td width="30%"> <?= $model->correo?></td>
                     <tr>
-                        
+                        <td width="16%"><b>Usuario:</b></td>
+                        <td width="34%"> <?= $model->user->username?></td>
                     </tr>
                     
                 </table>

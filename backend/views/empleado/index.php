@@ -1,20 +1,17 @@
 <?php
-Yii::$app->language = 'es_ES';
 
-use app\models\TblCategoria;
-use app\models\TblPresentacion;
-use app\models\TblProducto;
 use yii\helpers\Html;
-use kartik\grid\GridView;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use kartik\grid\GridView;
+use app\models\TblEmpleado;
+use yii\helpers\ArrayHelper;
 use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\models\OsigSearch */
+/* @var $searchModel app\models\EmpleadoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Listado de Categorias';
+$this->title = 'Listado de Empleados';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="row">
@@ -39,12 +36,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'attribute' => 'nombre',
+                    'attribute' => 'codigo',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->nombre, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->codigo, ['class' => 'badge bg-info ']);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('codigo')->all(), 'id', 'codigo'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -54,16 +51,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '150px',
+                    'width' => '100px',
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'attribute' => 'descripcion',
+                    'attribute' => 'nombres',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->descripcion, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->nombres);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
-                    'filter' => ArrayHelper::map(TblCategoria::find()->orderBy('descripcion')->all(), 'descripcion', 'descripcion'),
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('nombres')->all(), 'id', 'nombres'),
                     'filterWidgetOptions' => [
                         'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
@@ -73,52 +70,68 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'fecha_creacion',
-                    'headerOptions' => ['class' => 'kv-sticky-column'],
-                    'contentOptions' => ['class' => 'kv-sticky-column'],
+                    'width' => '100px',
+                    'format' => 'raw',
                     'vAlign' => 'middle',
-                    'hAlign' => 'right',
-                    'width' => '150px',
-                    'filterType' => GridView::FILTER_DATE,
-                    'filterWidgetOptions' => ([
-                        'model' => $dataProvider,
-                        'attribute' => 'fecha_creacion',
-                        'convertFormat' => true,
+                    'hAlign' => 'center',
+                    'attribute' => 'apellidos',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->apellidos);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('apellidos')->all(), 'id', 'apellidos'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
-                            'format' => 'yyyy-M-dd',
-                            'autoWidget' => true,
-                            'autoclose' => true,
-                            'todayHighlight' => true,
+                            'allowClear' => true
                         ],
-                    ]),
+                    ],
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'attribute' => 'fecha_actualizar',
-                    'headerOptions' => ['class' => 'kv-sticky-column'],
-                    'contentOptions' => ['class' => 'kv-sticky-column'],
+                    'width' => '100px',
+                    'format' => 'raw',
                     'vAlign' => 'middle',
-                    'hAlign' => 'right',
-                    'width' => '150px',
-                    'filterType' => GridView::FILTER_DATE,
-                    'filterWidgetOptions' => ([
-                        'model' => $dataProvider,
-                        'attribute' => 'fecha_actualizar',
-                        'convertFormat' => true,
+                    'hAlign' => 'center',
+                    'attribute' => 'correo',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->correo);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('correo')->all(), 'id', 'correo'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
                         'pluginOptions' => [
-                            'format' => 'yyyy-M-dd',
-                            'autoWidget' => true,
-                            'autoclose' => true,
-                            'todayHighlight' => true,
+                            'allowClear' => true
                         ],
-                    ]),
+                    ],
                 ],
+                [
+                    'class' => 'kartik\grid\DataColumn',
+                    'width' => '100px',
+                    'format' => 'raw',
+                    'vAlign' => 'middle',
+                    'hAlign' => 'center',
+                    'attribute' => 'direccion',
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->direccion);
+                    },
+                    'filterType' => GridView::FILTER_SELECT2,
+                    'filter' => ArrayHelper::map(TblEmpleado::find()->orderBy('direccion')->all(), 'id', 'direccion'),
+                    'filterWidgetOptions' => [
+                        'options' => ['placeholder' => 'Todos...'],
+                        'pluginOptions' => [
+                            'allowClear' => true
+                        ],
+                    ],
+                ],
+              
               
                
                
                 [
                     'class' => 'kartik\grid\ActionColumn',
-                    'urlCreator' => function ($action, \app\models\TblCategoria $model, $key, $index, $column) {
+                    'urlCreator' => function ($action, \app\models\TblEmpleado $model, $key, $index, $column) {
                         return Url::toRoute([$action, 'id' => $model->id]);
                     }
                 ],

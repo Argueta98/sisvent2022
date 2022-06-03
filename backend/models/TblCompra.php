@@ -92,7 +92,7 @@ class TblCompra extends \yii\db\ActiveRecord
         return $this->hasOne(TblProveedor::class, ['id' => 'idProveedor']);
     }
 
-    public static function getTotal($provider, $fieldName1, $fieldName2)
+ /*   public static function getTotal($provider, $fieldName1, $fieldName2)
     {
         $total = 0;
     
@@ -103,15 +103,9 @@ class TblCompra extends \yii\db\ActiveRecord
         $total = number_format( $total, 2 );
     
         return $total;
-    }
+    }*/
 
-    public static function getMulti()
-    {
-        foreach ($results as $result){
-            $total = $result->cantidad * $result->precio_unitario;
-        }
-        return $total;
-    }
+
     
 
 }

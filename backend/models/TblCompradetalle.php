@@ -32,9 +32,9 @@ class TblCompradetalle extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['idCompra', 'idProducto','cantidad'], 'integer'],
+            [['idCompra', 'idProducto'], 'integer'],
             [['cantidad'], 'required'],
-            [['precio_unitario'], 'number'],
+            [['cantidad','precio_unitario'], 'number'],
             [['idCompra'], 'exist', 'skipOnError' => true, 'targetClass' => TblCompra::className(), 'targetAttribute' => ['idCompra' => 'id']],
             [['idProducto'], 'exist', 'skipOnError' => true, 'targetClass' => TblProducto::className(), 'targetAttribute' => ['idProducto' => 'id']],
         ];
@@ -75,11 +75,11 @@ class TblCompradetalle extends \yii\db\ActiveRecord
         return $this->hasOne(TblProducto::class, ['id' => 'idProducto']);
     }
 
-    public static function getMulti()
+  /*  public static function getMulti()
     {
         foreach ($results as $result){
             $total = $result->cantidad * $result->precio_unitario;
         }
         return $total;
-    }
+    }*/
 }
