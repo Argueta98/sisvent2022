@@ -5,6 +5,7 @@ use app\models\TblProveedor;
 use app\models\TblVenta;
 use app\models\TblCliente;
 use app\models\TblEmpleado;
+use app\models\TblVentaSearch;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
@@ -166,7 +167,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     [
                         'content' =>
                         
-                        Html::a('<i class="fas fa-plus"></i> Agregar', ['create'], [
+                        Html::a('<i class="fas fa-plus"></i> Realizar  Venta', ['create'], [
                             'class' => 'btn btn-success',
                             'data-pjax' => 0,
                         ]) . ' ' .

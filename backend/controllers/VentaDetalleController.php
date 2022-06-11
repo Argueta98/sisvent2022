@@ -1,21 +1,17 @@
 <?php
 
 namespace backend\controllers;
-
-use app\models\TblCompradetalle;
-use app\models\TblComprobante;
-use app\models\ComprobanteSearch;
-use app\models\TblCompra;
-use app\models\CompraSearch;
-use app\models\CompraDetalleSearch;
+use yii\helpers\Url;
+use app\models\TblVentadetalle;
+use app\models\VentaDetalleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CompraDetalleController implements the CRUD actions for TblCompradetalle model.
+ * VentaDetalleController implements the CRUD actions for TblVentadetalle model.
  */
-class CompraDetalleController extends Controller
+class VentaDetalleController extends Controller
 {
     /**
      * @inheritDoc
@@ -36,13 +32,13 @@ class CompraDetalleController extends Controller
     }
 
     /**
-     * Lists all TblCompradetalle models.
+     * Lists all TblVentadetalle models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new CompraDetalleSearch();
+        $searchModel = new VentaDetalleSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -52,53 +48,55 @@ class CompraDetalleController extends Controller
     }
 
     /**
-     * Displays a single TblCompradetalle model.
+     * Displays a single TblVentadetalle model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new TblCompradetalle model.
+     * Creates a new TblVentadetalle model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate($id)
     {
-        $model = new TblCompradetalle();
-       // echo $id;
-       // die();
+        $model = new TblVentadetalle();
 
-       if ($model->load($this->request->post())) {
+        if ($model->load($this->request->post())) {
 
-         $model->idCompra = $id;
-        
-         
-         if (!$model->save()){
-            print_r($model->getErrors());
-            die(); 
-         }
-         $url = Url::to(['compra/view', 'id' => $id]);
-         return $this->redirect($url);
-     } else {
-         return $this->render('create', [
-             'model' => $model,
-         ]);
-     }
+            $model->idVenta = $id;
+            $model->precioventa = $model->producto->precio_venta;
+            $model->exento = $model->producto->precio_venta * $model->cantidad;
+            $model->sumas = $model->exento + $model->descuento;
+           //  echo $id;
+           //  die();
+            
+            if (!$model->save()){
+               print_r($model->getErrors());
+               die(); 
+            }
+           // return $this->redirect('index.php?r=venta%2Fview&id='.$model->venta->$id);
+          // return $this->redirect('index.php?r=VentaController/view&id='.$model->venta->$id);
+          // return $this->redirect(['venta/view', 'id' => $model->$id]);
+            //return $this->redirect(['index']);
+            $url = Url::to(['venta/view', 'id' => $id]);
+            return $this->redirect($url);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
 
-      /*  $model = new TblCompradetalle();
-
-        if ($this->request->isPost) {
+   /*     if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-
-                return $this->redirect(['index']);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -110,7 +108,7 @@ class CompraDetalleController extends Controller
     }
 
     /**
-     * Updates an existing TblCompradetalle model.
+     * Updates an existing TblVentadetalle model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -121,7 +119,7 @@ class CompraDetalleController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -130,7 +128,7 @@ class CompraDetalleController extends Controller
     }
 
     /**
-     * Deletes an existing TblCompradetalle model.
+     * Deletes an existing TblVentadetalle model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -144,15 +142,15 @@ class CompraDetalleController extends Controller
     }
 
     /**
-     * Finds the TblCompradetalle model based on its primary key value.
+     * Finds the TblVentadetalle model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return TblCompradetalle the loaded model
+     * @return TblVentadetalle the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = TblCompradetalle::findOne(['id' => $id])) !== null) {
+        if (($model = TblVentadetalle::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

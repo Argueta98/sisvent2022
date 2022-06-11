@@ -10,19 +10,18 @@ use Yii;
  * @property int $id
  * @property int|null $idProducto
  * @property int|null $idVenta
- * @property float $cantidad
- * @property float $precioventa
+ * @property float|null $cantidad
+ * @property float|null $precioventa
  * @property float|null $iva
  * @property float|null $exento
  * @property float|null $descuento
  * @property float|null $retenido
  * @property float|null $sumas
- * @property float $total
+ * @property float|null $total
  * @property float|null $cambio
  *
  * @property Producto $idProducto0
  * @property Venta $idVenta0
- * @property Venta $venta
  */
 class TblVentadetalle extends \yii\db\ActiveRecord
 {
@@ -41,9 +40,7 @@ class TblVentadetalle extends \yii\db\ActiveRecord
     {
         return [
             [['idProducto', 'idVenta'], 'integer'],
-            [['cantidad', 'precioventa', 'total'], 'required'],
             [['cantidad', 'precioventa', 'iva', 'exento', 'descuento', 'retenido', 'sumas', 'total', 'cambio'], 'number'],
-            [['idVenta'], 'unique'],
             [['idProducto'], 'exist', 'skipOnError' => true, 'targetClass' => TblProducto::className(), 'targetAttribute' => ['idProducto' => 'id']],
             [['idVenta'], 'exist', 'skipOnError' => true, 'targetClass' => TblVenta::className(), 'targetAttribute' => ['idVenta' => 'id']],
         ];
@@ -56,7 +53,7 @@ class TblVentadetalle extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
-            'idProducto' => Yii::t('app', 'Id Producto'),
+            'idProducto' => Yii::t('app', 'Producto'),
             'idVenta' => Yii::t('app', 'Id Venta'),
             'cantidad' => Yii::t('app', 'Cantidad'),
             'precioventa' => Yii::t('app', 'Precioventa'),
@@ -86,16 +83,6 @@ class TblVentadetalle extends \yii\db\ActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getVenta()
-    {
-        return $this->hasOne(TblVenta::class, ['id' => 'idVenta']);
-    }
-
-    /**
-     * Gets query for [[Venta]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getVenta1()
     {
         return $this->hasOne(TblVenta::class, ['id' => 'idVenta']);
     }

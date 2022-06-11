@@ -57,7 +57,8 @@ use yii\helpers\Html;
                                     'onColor' => 'success',
                                     'offColor' => 'danger',
                                     'onText' => 'Finalizada',
-                                    'offText' => 'Progreso'
+                                    'offText' => 'Proceso'
+                                    
                                 ]
                             ]); ?>
                         </div>

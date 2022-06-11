@@ -71,7 +71,7 @@ class TblVenta extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getVentaDetalle()
+    public function getVentadetalle()
     {
         return $this->hasOne(TblVentadetalle::class, ['idVenta' => 'id']);
     }

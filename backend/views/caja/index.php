@@ -131,9 +131,7 @@ Modal::end();
                 'toolbar' =>  [
                     [
                         'content' =>
-                        Html::button('<i class="fa fa-plus"></i> Modal', ['value' => Url::to(['create-modal']), 
-                        'class' => 'btn btn-warning', 'id' => 'modalButton'
-                        ]) .' &nbsp&nbsp '.
+                        
                         Html::a('<i class="fas fa-box-open"></i> Abrir Caja', ['create'], [
                             'class' => 'btn btn-warning',
                             'data-pjax' => 0,

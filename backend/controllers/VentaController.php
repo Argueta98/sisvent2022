@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use app\models\TblVenta;
 use app\models\VentaSearch;
+use app\models\VentaDetalleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,6 +39,7 @@ class VentaController extends Controller
      */
     public function actionIndex()
     {
+
         $searchModel = new VentaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -55,8 +57,14 @@ class VentaController extends Controller
      */
     public function actionView($id)
     {
+
+        $searchModel = new VentaDetalleSearch();
+        $searchModel->idVenta = $id;
+        $dataProvider = $searchModel->search($this->request->queryParams);
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

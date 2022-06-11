@@ -6,18 +6,17 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\VentaSearch */
+/* @var $searchModel app\models\VentaDetalleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Tbl Ventas');
+$this->title = Yii::t('app', 'Ventadetalles');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="tbl-venta-index">
+<div class="tbl-ventadetalle-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Tbl Venta'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Create Tbl Ventadetalle'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,17 +28,20 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'num_venta',
-            'tipo_pago',
-            'idCliente',
-            'idEmpleado',
-            'serie',
-            'fecha',
-            //'idUsuario',
-            'estado',
+            'idProducto',
+            'idVenta',
+            'cantidad',
+            'precioventa',
+            //'iva',
+            //'exento',
+            //'descuento',
+            //'retenido',
+            //'sumas',
+            //'total',
+            //'cambio',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, TblVenta $model, $key, $index, $column) {
+                'urlCreator' => function ($action, $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
