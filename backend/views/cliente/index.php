@@ -35,14 +35,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
+                    'width' => '200px',
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'attribute' => 'nombre',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->nombre, ['class' => 'badge bg-info ']);
-                    },
+                    'value' => 'nombre',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCliente::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
                     'filterWidgetOptions' => [
@@ -56,10 +54,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'apellido',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->apellido,  ['view', 'apellido' => $model->id]);
-                    },
+                    'value' => 'apellido',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCliente::find()->orderBy('apellido')->all(), 'id', 'apellido'),
                     'filterWidgetOptions' => [
@@ -73,10 +70,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'direccion',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->direccion,  ['view', 'direccion' => $model->id]);
-                    },
+                    'value' => 'direccion',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCliente::find()->orderBy('direccion')->all(), 'id', 'direccion'),
                     'filterWidgetOptions' => [
@@ -90,10 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'telefono',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->telefono,  ['view', 'telefono' => $model->id]);
-                    },
+                    'value' => 'telefono',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCliente::find()->orderBy('telefono')->all(), 'id', 'telefono'),
                     'filterWidgetOptions' => [
@@ -108,9 +103,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'correo',
                     'vAlign' => 'middle',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->correo,  ['view', 'correo' => $model->id]);
-                    },
+                    'value' => 'correo',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCliente::find()->orderBy('correo')->all(), 'id', 'correo'),
                     'filterWidgetOptions' => [

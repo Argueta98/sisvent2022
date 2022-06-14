@@ -35,13 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
+                    'width' => '200px',
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'attribute' => 'codigo',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->codigo, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->codigo);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('codigo')->all(), 'codigo', 'codigo'),
@@ -57,9 +57,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'nit',
                     'vAlign' => 'middle',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->nit,  ['view', 'nit' => $model->id]);
-                    },
+                    'hAlign' => 'center',
+                    'value' => 'nit',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('nit')->all(), 'id', 'nit'),
                     'filterWidgetOptions' => [
@@ -74,9 +73,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'nombre',
                     'vAlign' => 'middle',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->nombre,  ['view', 'nombre' => $model->id]);
-                    },
+                    'hAlign' => 'center',
+                    'value' => 'nombre',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('nombre')->all(), 'id', 'nombre'),
                     'filterWidgetOptions' => [
@@ -90,10 +88,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'direccion',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->direccion,  ['view', 'direccion' => $model->id]);
-                    },
+                    'value' => 'direccion',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('direccion')->all(), 'id', 'direccion'),
                     'filterWidgetOptions' => [
@@ -108,9 +105,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     'attribute' => 'razonsocial',
                     'vAlign' => 'middle',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->razonsocial,  ['view', 'razonsocial' => $model->id]);
-                    },
+                    'hAlign' => 'center',
+                    'value' => 'razonsocial',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('razonsocial')->all(), 'id', 'razonsocial'),
                     'filterWidgetOptions' => [
@@ -124,10 +120,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'telefono',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->telefono,  ['view', 'telefono' => $model->id]);
-                    },
+                    'value' => 'telefono',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProveedor::find()->orderBy('telefono')->all(), 'id', 'telefono'),
                     'filterWidgetOptions' => [

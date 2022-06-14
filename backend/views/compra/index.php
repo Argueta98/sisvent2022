@@ -76,14 +76,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
+                    'width' => '150px',
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'attribute' => 'serie',
-                    'value' => function ($model) {
-                        return Html::tag('span', $model->serie, ['class' => 'badge bg-info ']);
-                    },
+                    'value' => 'serie',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblCompra::find()->orderBy('serie')->all(), 'serie', 'serie'),
                     'filterWidgetOptions' => [
@@ -120,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'width' => '250px',
+                    'width' => '200px',
                     'filterType' => GridView::FILTER_DATE,
                     'filterWidgetOptions' => ([
                         'model' => $dataProvider,
@@ -141,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
-                    'width' => '250px',
+                    'width' => '200px',
                     'filterType' => GridView::FILTER_DATE,
                     'filterWidgetOptions' => ([
                         'model' => $dataProvider,

@@ -68,10 +68,12 @@ class CajaController extends Controller
     public function actionCreate()
     {
         $model = new TblCaja();
+        $model->fecha_apertura = date('Y-m-d H:i:s');
+        $model->estado= 1;
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -124,9 +126,11 @@ class CajaController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->fecha_cierre= date('Y-m-d H:i:s');
+        $model->estado = 0;
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

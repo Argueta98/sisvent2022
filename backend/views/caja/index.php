@@ -69,9 +69,11 @@ Modal::end();
                     'class' => 'kartik\grid\DataColumn',
                     'attribute' => 'monto_cierre',
                     'vAlign' => 'middle',
+                    'width' => '100px',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->monto_cierre,  ['view', 'monto_cierre' => $model->id]);
+                    'value' => function ($model) {
+                        return Html::tag('span', $model->monto_cierre, ['class' => 'badge bg-red ']);
                     },
                     'filter' => false,
                     
@@ -83,7 +85,8 @@ Modal::end();
                     'contentOptions' => ['class' => 'kv-sticky-column'],
                     'vAlign' => 'middle',
                     'hAlign' => 'right',
-                    'width' => '250px',
+                    'hAlign' => 'center',
+                    'width' => '100px',
                     'filter' => false,
                 ],
 
@@ -92,7 +95,7 @@ Modal::end();
                     'trueLabel' => 'Si',
                     'falseLabel' => 'No',
                     'attribute' => 'estado',
-                    'width' => '120px',
+                    'width' => '10px',
                     'filter' => false,
                     
                 ],

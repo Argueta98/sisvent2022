@@ -19,7 +19,7 @@ use yii\helpers\Html;
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Abrir Caja/ Crear registro</h3>
+                <h3 class="card-title">Cerrar Caja/ Crear registro</h3>
             </div>
         </div>
         <?php $form = ActiveForm::begin(['type' => ActiveForm::TYPE_HORIZONTAL]); ?>
@@ -28,8 +28,8 @@ use yii\helpers\Html;
                     <div class="row">
                         
                         <div class="col-md-6">
-                            <?= Html::activeLabel($model, 'monto_apertura', ['class' => 'control-label']) ?>
-                            <?= $form->field($model, 'monto_apertura', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
+                            <?= Html::activeLabel($model, 'monto_cierre', ['class' => 'control-label']) ?>
+                            <?= $form->field($model, 'monto_cierre', ['showLabels' => false])->textInput(['autofocus' => true]) ?>
                         </div>
                         
                         </div>

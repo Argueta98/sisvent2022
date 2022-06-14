@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'hAlign' => 'center',
                     'attribute' => 'codigo',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->codigo, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->codigo);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblProducto::find()->orderBy('codigo')->all(), 'codigo', 'codigo'),

@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\models\TblCaja */
 
 $this->title = Yii::t('app', 'Administrar Caja');
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Tbl Cajas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Caja'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-caja-create">

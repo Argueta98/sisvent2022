@@ -35,13 +35,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
+                    'width' => '200px',
                     'format' => 'raw',
                     'vAlign' => 'middle',
                     'hAlign' => 'center',
                     'attribute' => 'nombre',
                     'value' => function ($model) {
-                        return Html::tag('span', $model->nombre, ['class' => 'badge bg-info ']);
+                        return Html::tag('span', $model->nombre);
                     },
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('nombre')->all(), 'nombre', 'nombre'),
@@ -54,13 +54,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 ],
                 [
                     'class' => 'kartik\grid\DataColumn',
-                    'width' => '100px',
+                    'width' => '200px',
                     'attribute' => 'descripcion',
                     'vAlign' => 'middle',
+                    'hAlign' => 'center',
                     'format' => 'html',
-                    'value' => function ($model, $key, $index, $widget) {
-                        return Html::a($model->descripcion,  ['view', 'descripcion' => $model->id]);
-                    },
+                    'value' => 'descripcion',
+                    /*'value' => function ($model, $key, $index, $widget) {
+                        return Html::a($model->descripcion,  ['view', 'id' => $model->id]);
+                    },*/
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('descripcion')->all(), 'id', 'descripcion'),
                     'filterWidgetOptions' => [
@@ -75,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'trueLabel' => 'Si',
                     'falseLabel' => 'No',
                     'attribute' => 'estado',
-                    'width' => '50px',
+                    'width' => '10px',
                     'filterType' => GridView::FILTER_SELECT2,
                     'filter' => ArrayHelper::map(TblPresentacion::find()->orderBy('descripcion')->all(), 'id', 'estado'),
                     'filterWidgetOptions' => [
